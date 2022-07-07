@@ -18,6 +18,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- For integration tests through heroku -->
   <script src="https://echo.loadmill.com/recorder.js?loadmill_code=eb32f5e5-41b5-4894-b0f0-1410a1d285fa"></script>
+
   <script>
 
         $( async function() {
@@ -250,33 +251,9 @@
         );
   </script>
 </head>
-</head>
+
 <body>
-  <!--[START] https://www.w3schools.com/bootstrap5/bootstrap_navbar.php-->
-  <nav class="navbar navbar-expand-sm bg-light navbar-light" style="background-color: darkseagreen !important; color: black !important;">
-    <div class="container-fluid" style="background-color: darkseagreen !important; color: black !important;">
-      <a class="navbar-brand" href="#" style=" font-size: 16px; background-color: darkseagreen; color: black ">Comment part of a text</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav" style="margin-left: 2px; ">
-          <li class="nav-item active">
-            <a class="nav-link  " href="#" style=" font-size: 16px; background-color: darkseagreen; color: black ">Comment text</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="createText.html" style="font-size: 16px; background-color: darkseagreen; color: black ">Create text</a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="deleteText.html" style="font-size: 16px; background-color: darkseagreen; color: black ">Delete text</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-
-  <!--[END] https://www.w3schools.com/bootstrap5/bootstrap_navbar.php-->
+ 
   <main>
 
 
@@ -304,7 +281,7 @@
             <strong>Percent(%) </strong>: Adjust this value to capture more comments inside.<br>
             100% requires full match of comment. Lesser values capture smaller <br> comments inside area
           </label>
-          <input class="form-control input-sm w-25 " type="number" id="percent" value="100"></input>
+          <input class="form-control input-sm w-25 " type="number" id="percent" value="100" />
           <p>
             <label for="likes">Likes <i class="fa fa-thumbs-up" aria-hidden="true"> </i></label>
 
