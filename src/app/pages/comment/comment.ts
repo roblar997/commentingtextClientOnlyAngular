@@ -14,9 +14,9 @@ export class commentComponent {
   selectStart: number | undefined;
   selectEnd: number | undefined;
   selectedText: string | undefined;
-  commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> | undefined
-  tidslinjerList: Array<tidslinje> | undefined
-  titleList: Array<title> | undefined;
+  commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array < tidslinjeCommandWrapper >()
+  tidslinjerList: Array<tidslinje> = new Array<tidslinje>()
+  titleList: Array<title> = new Array<title>()
 
   selectStartChange1(selectedStart : number) {
 

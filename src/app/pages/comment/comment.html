@@ -27,8 +27,8 @@
 
     <div class="container">
       <div>
-        <titlesearch  [selectedEnd]   ="selectedEnd"
-                      [selectedStart] = "selectedStart"
+        <titlesearch  [selectEnd]   ="selectEnd"
+                      [selectStart] = "selectStart"
                       [selectedText]  = "selectedText"
                       [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
                       [tidslinjerList] ="tidslinjerList"
@@ -39,8 +39,8 @@
                       (commandTidslinjeWrapperChange)="commandTidslinjeWrapperChange1"
                       (tidslinjerListChange)="tidslinjerListChange1"
                       (titleListChange)="titleListChange1"></titlesearch>
-        <commentsearchinfo  [selectedEnd]   ="selectedEnd"
-                      [selectedStart] = "selectedStart"
+        <commentsearchinfo  [selectEnd]   ="selectEnd"
+                      [selectStart] = "selectStart"
                       [selectedText]  = "selectedText"
                       [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
                       [tidslinjerList] ="tidslinjerList"
@@ -52,8 +52,8 @@
                       (tidslinjerListChange)="tidslinjerListChange2"
                       (titleListChange)="titleListChange2"></commentsearchinfo>
 
-        <commentschema  [selectedEnd]   ="selectedEnd"
-                      [selectedStart] = "selectedStart"
+        <commentschema  [selectEnd]   ="selectEnd"
+                      [selectStart] = "selectStart"
                       [selectedText]  = "selectedText"
                       [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
                       [tidslinjerList] ="tidslinjerList"
@@ -67,8 +67,8 @@
 
       </div>
 
-      <commentlist  [selectedEnd]   ="selectedEnd"
-                      [selectedStart] = "selectedStart"
+      <commentlist  [selectEnd]   ="selectEnd"
+                      [selectStart] = "selectStart"
                       [selectedText]  = "selectedText"
                       [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
                       [tidslinjerList] ="tidslinjerList"
