@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.26-alpha">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>307453ba-2d52-4cce-8a6e-a82062b6aabd</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupCommand>npm start</StartupCommand>
+    <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\app\services\" />
+    <Folder Include="src\app\pages\deleteText\" />
+    <Folder Include="src\app\forms\" />
+    <Folder Include="src\app\models\" />
+  </ItemGroup>
+</Project>
