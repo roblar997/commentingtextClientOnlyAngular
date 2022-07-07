@@ -8,7 +8,10 @@ import { title } from "../../../../models/title";
   selector: "commentlist",
   templateUrl: "commentlist.html"
 })
-export class commentlistComponent implements OnChanges {
+export class commentlistComponent implements OnChanges, OnInit {
+  ngOnInit(): void {
+
+  }
 
   ngOnChanges(changes: SimpleChanges) {
 

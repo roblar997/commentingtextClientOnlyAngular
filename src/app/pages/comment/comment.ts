@@ -11,7 +11,7 @@ import { title } from "../../models/title";
 })
 export class commentComponent {
 
-  selectStart: number | undefined;
+  selectStart!: number;
   selectEnd: number | undefined;
   selectedText: string | undefined;
   commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array < tidslinjeCommandWrapper >()
@@ -19,7 +19,12 @@ export class commentComponent {
   titleList: Array<title> = new Array<title>()
 
   selectStartChange1(selectedStart : number) {
+    console.log("Parent received number " + selectedStart);
 
+    this.selectStart = selectedStart+1;
+    console.log("Parent changing this number to " + this.selectStart)
+    
+     
   }
   selectStartChange2(selectedStart: number) {
 

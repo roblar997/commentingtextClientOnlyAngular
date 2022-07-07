@@ -8,7 +8,13 @@ import { title } from "../../../../models/title";
   selector: "commentsearchinfo",
   templateUrl: "commentSearchInfo.html"
 })
-export class commentSearchInfoComponent implements OnChanges {
+export class commentSearchInfoComponent implements OnChanges, OnInit {
+  ngOnInit(): void {
+    //TESTING!!
+    this.selectStartChangeFun()
+  }
+
+
   ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {

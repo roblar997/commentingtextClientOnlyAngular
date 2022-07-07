@@ -8,13 +8,20 @@ import { title } from "../../../../models/title";
   selector: "titlesearch",
   templateUrl: "titleSearch.html"
 })
-export class titleSearchComponent implements OnChanges {
+export class titleSearchComponent implements OnChanges, OnInit {
+  ngOnInit(): void {
+    //TESTING!!
+    this.selectStart = 5;
+    this.selectStartChangeFun()
+  }
 
   ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
 
+      console.log("Child detecting change. Value is now " + changes[property].currentValue)
     }
+ 
   } 
   //Get change in start and end of selection of text
   @Input('selectStart') selectStart: number | undefined;

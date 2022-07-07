@@ -8,7 +8,11 @@ import { title } from "../../../../models/title";
   selector: "commentschema",
   templateUrl: "commentSchema.html"
 })
-export class commentSchemaComponent implements OnChanges {
+export class commentSchemaComponent implements OnChanges, OnInit {
+  ngOnInit(): void {
+    //TESTING!!
+    this.selectStartChangeFun()
+  }
 
   ngOnChanges(changes: SimpleChanges) {
 
