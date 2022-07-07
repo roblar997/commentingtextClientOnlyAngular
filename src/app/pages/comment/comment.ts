@@ -18,42 +18,42 @@ export class commentComponent {
   tidslinjerList: Array<tidslinje> | undefined
   titleList: Array<title> | undefined;
 
-  selectStartChange1() {
+  selectStartChange1(selectedStart : number) {
 
   }
-  selectStartChange2() {
+  selectStartChange2(selectedStart: number) {
 
   }
-  selectStartChange3() {
+  selectStartChange3(selectedStart: number) {
 
   }
-  selectStartChange4() {
-
-  }
-
-  selectEndChange1() {
-
-  }
-  selectEndChange2() {
-
-  }
-  selectEndChange3() {
-
-  }
-  selectEndChange4() {
+  selectStartChange4(selectedStart: number) {
 
   }
 
-  selectedTextChange1() {
+  selectEndChange1(selectedEnd : number) {
 
   }
-  selectedTextChange2() {
+  selectEndChange2(selectedEnd: number) {
 
   }
-  selectedTextChange3() {
+  selectEndChange3(selectedEnd: number) {
 
   }
-  selectedTextChange4() {
+  selectEndChange4(selectedEnd: number) {
+
+  }
+
+  selectedTextChange1(selectedText: string) {
+
+  }
+  selectedTextChange2(selectedText: string) {
+
+  }
+  selectedTextChange3(selectedText: string) {
+
+  }
+  selectedTextChange4(selectedText: string) {
 
   }
 
