@@ -18,16 +18,16 @@ export class commentComponent {
   tidslinjerList: Array<tidslinje> | undefined
   titleList: Array<title> | undefined;
 
-  selectStartChangeChild1() {
+  selectStartChange1() {
 
   }
-  selectStartChangeChild2() {
+  selectStartChange2() {
 
   }
-  selectStartChangeChild3() {
+  selectStartChange3() {
 
   }
-  selectStartChangeChild4() {
+  selectStartChange4() {
 
   }
 
