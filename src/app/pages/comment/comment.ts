@@ -9,14 +9,13 @@ import { title } from "../../models/title";
   selector: "Comment",
   templateUrl: "comment.html"
 })
-export class commentComponent implements OnChanges {
+export class commentComponent {
 
-  ngOnChanges(changes: SimpleChanges) {
-
-    for (let property in changes) {
-
-    }
-  }
-
+  selectStart: number | undefined;
+  selectEnd: number | undefined;
+  selectedText: string | undefined;
+  commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> | undefined
+  tidslinjerList: Array<tidslinje> | undefined
+  titleList: Array<title> | undefined;
  
 }

@@ -27,13 +27,34 @@
 
     <div class="container">
       <div>
-        <titlesearch></titlesearch>
-        <commentsearchinfo></commentsearchinfo>
-        <commentschema></commentschema>
+        <titlesearch  [selectedEnd]   ="selectedEnd"
+                      [selectedStart] = "selectedStart"
+                      [selectedText]  = "selectedText"
+                      [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
+                      [tidslinjerList] ="tidslinjerList"
+                      [titleList]="titleList"
+                     ></titlesearch>
+        <commentsearchinfo  [selectedEnd]   ="selectedEnd"
+                      [selectedStart] = "selectedStart"
+                      [selectedText]  = "selectedText"
+                      [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
+                      [tidslinjerList] ="tidslinjerList"
+                      [titleList]="titleList"></commentsearchinfo>
+        <commentschema  [selectedEnd]   ="selectedEnd"
+                      [selectedStart] = "selectedStart"
+                      [selectedText]  = "selectedText"
+                      [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
+                      [tidslinjerList] ="tidslinjerList"
+                      [titleList]="titleList"></commentschema>
 
       </div>
 
-      <commentlist></commentlist>
+      <commentlist  [selectedEnd]   ="selectedEnd"
+                      [selectedStart] = "selectedStart"
+                      [selectedText]  = "selectedText"
+                      [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
+                      [tidslinjerList] ="tidslinjerList"
+                      [titleList]="titleList"></commentlist>
     </div>
   </main>
 
