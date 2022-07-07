@@ -4,6 +4,10 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { topNavComponent } from './nav-menu/topNav';
 import { commentComponent } from './pages/comment/comment';
+import { commentlistComponent } from './pages/comment/components/commentList/commentlist';
+import { commentSchemaComponent } from './pages/comment/components/commentSchema/commentSchema';
+import { commentSearchInfoComponent } from './pages/comment/components/commentSearchInfo/commentSearchInfo';
+import { titleSearchComponent } from './pages/comment/components/titleSearch/titleSearch';
 import { createTextComponent } from './pages/createText/createText';
 import { deleteTextComponent } from './pages/deleteText/deleteText';
 
@@ -13,7 +17,11 @@ import { deleteTextComponent } from './pages/deleteText/deleteText';
     topNavComponent,
     commentComponent,
     createTextComponent,
-    deleteTextComponent
+    deleteTextComponent,
+    commentlistComponent,
+    commentSchemaComponent,
+    commentSearchInfoComponent,
+    titleSearchComponent
   ],
   imports: [
     BrowserModule,

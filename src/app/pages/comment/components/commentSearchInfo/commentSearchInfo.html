@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+  <div>
+    <div class="form-group centered">
+      <p class="h3" style="margin-top: 10px">Text to comment </p>
+      <textarea id="textToComment" style="overflow-y: auto; width:320px; height:320px; margin-top: 10px" readonly> Choose a title and press load text, to get
+                 it pasted in here</textarea>
+
+
+    </div>
+
+    <p class="h3" style="margin-top: 10px">Search for comments by marking text </p>
+    <label for="percent">
+      <strong>Percent(%) </strong>: Adjust this value to capture more comments inside.<br>
+      100% requires full match of comment. Lesser values capture smaller <br> comments inside area
+    </label>
+    <input class="form-control input-sm w-25 " type="number" id="percent" value="100" />
+    <p>
+      <label for="likes">Likes <i class="fa fa-thumbs-up" aria-hidden="true"> </i></label>
+
+      <input type="text" id="likes" readonly style="border:0; color:black; font-weight:bold;">
+    </p>
+    <p>
+      <label for="dislikes">Dislikes <i class="fa fa-thumbs-down" aria-hidden="true"> </i></label>
+
+      <input type="text" id="dislikes" readonly style="border:0; color:black; font-weight:bold;">
+    </p>
+    <p class="h3" style="margin-top: 10px">Color map of comment density </p>
+    <div id="textDensityMap" style="overflow-y: auto; width:320px; height:320px; margin-top: 10px" readonly> ..</div>
+
+  </div>
+</body>
+</html>
