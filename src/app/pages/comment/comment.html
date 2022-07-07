@@ -33,19 +33,38 @@
                       [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
                       [tidslinjerList] ="tidslinjerList"
                       [titleList]="titleList"
+                      (selectStartChange)=""
+                      (selectEndChange)=""
+                      (selectedTextChange)=""
+                      (commandTidslinjeWrapperChange)="commandTidslinjeWrapperChange1"
+                      (tidslinjerListChange)=""
+                      (titleListChange)="titleListChange1"
                      ></titlesearch>
         <commentsearchinfo  [selectedEnd]   ="selectedEnd"
                       [selectedStart] = "selectedStart"
                       [selectedText]  = "selectedText"
                       [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
                       [tidslinjerList] ="tidslinjerList"
-                      [titleList]="titleList"></commentsearchinfo>
+                      [titleList]="titleList"
+                      (selectStartChange)=""
+                      (selectEndChange)=""
+                      (selectedTextChange)=""
+                      (commandTidslinjeWrapperChange)="commandTidslinjeWrapperChange2"
+                      (tidslinjerListChange)=""
+                      (titleListChange)="titleListChange2"></commentsearchinfo>
+
         <commentschema  [selectedEnd]   ="selectedEnd"
                       [selectedStart] = "selectedStart"
                       [selectedText]  = "selectedText"
                       [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
                       [tidslinjerList] ="tidslinjerList"
-                      [titleList]="titleList"></commentschema>
+                      [titleList]="titleList"
+                      (selectStartChange)=""
+                      (selectEndChange)=""
+                      (selectedTextChange)=""
+                      (commandTidslinjeWrapperChange)="commandTidslinjeWrapperChange3"
+                      (tidslinjerListChange)=""
+                      (titleListChange)="titleListChange3"></commentschema>
 
       </div>
 
@@ -54,7 +73,13 @@
                       [selectedText]  = "selectedText"
                       [commandTidslinjeWrapper] = "commandTidslinjeWrapper"
                       [tidslinjerList] ="tidslinjerList"
-                      [titleList]="titleList"></commentlist>
+                      [titleList]="titleList"
+                       (selectStartChange)=""
+                      (selectEndChange)=""
+                      (selectedTextChange)=""
+                      (commandTidslinjeWrapperChange)="commandTidslinjeWrapperChange4"
+                      (tidslinjerListChange)=""
+                      (titleListChange)="titleListChange4"></commentlist>
     </div>
   </main>
 
