@@ -56,7 +56,7 @@ export class commentComponent {
     console.log("Parent received text from child 2: " + selectedText.valueOf());
 
     this.selectedText = selectedText.valueOf() + " parrent added this ";
-    console.log("Parent changing this number to " + this.selectStart.valueOf())
+    console.log("Parent changing this text to " + this.selectedText.valueOf())
 
   }
   selectedTextChange3(selectedText: String) {
