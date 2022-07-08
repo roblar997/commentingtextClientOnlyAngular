@@ -11,41 +11,41 @@ import { title } from "../../models/title";
 })
 export class commentComponent {
 
-  selectStart!: number;
-  selectEnd: number | undefined;
+  selectStart: Number = new Number();
+  selectEnd: Number = new Number();
   selectedText: string | undefined;
   commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array < tidslinjeCommandWrapper >()
   tidslinjerList: Array<tidslinje> = new Array<tidslinje>()
   titleList: Array<title> = new Array<title>()
 
-  selectStartChange1(selectedStart : number) {
-    console.log("Parent received number " + selectedStart);
+  selectStartChange1(selectedStart : Number) {
+    console.log("Parent received number " + selectedStart.valueOf());
 
-    this.selectStart = selectedStart+1;
-    console.log("Parent changing this number to " + this.selectStart)
+    this.selectStart = selectedStart.valueOf() + 1;
+    console.log("Parent changing this number to " + this.selectStart.valueOf())
     
      
   }
-  selectStartChange2(selectedStart: number) {
+  selectStartChange2(selectedStart: Number) {
 
   }
-  selectStartChange3(selectedStart: number) {
+  selectStartChange3(selectedStart: Number) {
 
   }
-  selectStartChange4(selectedStart: number) {
+  selectStartChange4(selectedStart: Number) {
 
   }
 
-  selectEndChange1(selectedEnd : number) {
+  selectEndChange1(selectedEnd : Number) {
 
   }
-  selectEndChange2(selectedEnd: number) {
+  selectEndChange2(selectedEnd: Number) {
 
   }
-  selectEndChange3(selectedEnd: number) {
+  selectEndChange3(selectedEnd: Number) {
 
   }
-  selectEndChange4(selectedEnd: number) {
+  selectEndChange4(selectedEnd: Number) {
 
   }
 

@@ -20,17 +20,18 @@ export class commentlistComponent implements OnChanges, OnInit {
     }
   }
   //Get change in start and end of selection of text
-  @Input('selectStart') selectStart: number | undefined;
-  @Output() selectStartChange: EventEmitter<number> = new EventEmitter<number>();
+  @Input('selectStart') selectStart: Number = new Number();
+  @Output() selectStartChange: EventEmitter<Number> = new EventEmitter<Number>();
 
   selectStartChangeFun() {
+    
     this.selectStartChange.emit(this.selectStart);
   }
 
 
-  @Input('selectEnd') selectEnd: number | undefined
+  @Input('selectEnd') selectEnd: Number = new Number();
 
-  @Output() selectEndChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() selectEndChange: EventEmitter<Number> = new EventEmitter<Number>();
   selectEndChangeFun() {
     this.selectEndChange.emit(this.selectEnd);
   }

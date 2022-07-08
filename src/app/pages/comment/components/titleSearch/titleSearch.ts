@@ -1,40 +1,48 @@
 
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
-
+import { AfterContentChecked,AfterViewChecked } from '@angular/core';
 @Component({
   selector: "titlesearch",
   templateUrl: "titleSearch.html"
 })
 export class titleSearchComponent implements OnChanges, OnInit {
+  constructor(
+    private cdref: ChangeDetectorRef) { }
+  loading = true;
   ngOnInit(): void {
     //TESTING!!
     this.selectStart = 5;
     this.selectStartChangeFun()
   }
+  ngAfterViewInit() {
+ 
+    Promise.resolve().then(() => this.cdref.detectChanges());
+  }
+
 
   ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
-
-      console.log("Child detecting change. Value is now " + changes[property].currentValue)
+      if(property == "selectStart")
+      console.log("Child detecting change. Value is now " + (changes[property].currentValue))
     }
  
   } 
   //Get change in start and end of selection of text
-  @Input('selectStart') selectStart: number | undefined;
-  @Output() selectStartChange: EventEmitter<number> = new EventEmitter<number>();
+  @Input('selectStart') selectStart: Number = new Number();
+  @Output() selectStartChange: EventEmitter<Number> = new EventEmitter<Number>();
 
   selectStartChangeFun() {
-    this.selectStartChange.emit(this.selectStart);
+    this.selectStartChange.emit(this.selectStart.valueOf());
   }
 
 
-  @Input('selectEnd') selectEnd: number | undefined
+  @Input('selectEnd') selectEnd: Number = new Number();
 
-  @Output() selectEndChange: EventEmitter<number> = new EventEmitter<number>();
+  @Output() selectEndChange: EventEmitter<Number> = new EventEmitter<Number>();
   selectEndChangeFun() {
     this.selectEndChange.emit(this.selectEnd);
   }
