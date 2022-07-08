@@ -11,31 +11,27 @@ export class newTextCommunicationService {
   constructor(private http: HttpClient) {
   }
 
-  getInitPState(texttocommentid: Number): Observable<any> {
-    const headers = { 'content-type': 'application/json' }
-    const data = JSON.stringify(" et objekt ");
-    return this.http.post(this.baseURL, data, { 'headers': headers });
-  }
 
   addPNewText(title: String, text: String): Observable<any> {
-    const headers = { 'content-type': 'application/json' }
-    const data = JSON.stringify(" et objekt ");
+    const headers = { 'content-type': 'application/json; charset=utf-8' };
+    const data = JSON.stringify({ "remoteMethod": "addText", "title": title, "text": text });
     return this.http.post(this.baseURL, data, { 'headers': headers });
   }
 
   getText(title : String): Observable<any> {
-    const headers = { 'content-type': 'application/json' }
-    const data = JSON.stringify(" et objekt ");
+    const headers = { 'content-type': 'application/json; charset=utf-8' };
+    const data = JSON.stringify({ "remoteMethod": "getText", "title": title });
     return this.http.post(this.baseURL, data, { 'headers': headers });
   }
   deletePText(title: String): Observable<any> {
-    const headers = { 'content-type': 'application/json' }
-    const data = JSON.stringify(" et objekt ");
+    const headers = { 'content-type': 'application/json; charset=utf-8' };
+    const data = JSON.stringify({ "remoteMethod": "deleteText", "title": title });
     return this.http.post(this.baseURL, data, { 'headers': headers });
   }
   getTitlesFromServer(): Observable<any> {
-    const headers = { 'content-type': 'application/json' }
-    const data = JSON.stringify(" et objekt ");
+    const headers = {
+      'content-type': 'application/json; charset=utf-8'   };
+    const data = JSON.stringify({ "remoteMethod": "getTitles" });
     return this.http.post(this.baseURL, data, { 'headers': headers });
   }
 }

@@ -4,12 +4,22 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { tidslinje } from "../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../models/tidslinjeCommandWrapper";
 import { title } from "../../models/title";
+import { newTextCommunicationService } from "../../services/newTextCommunicationService";
+import { timelineCommunicationService } from "../../services/timelineCommunicationService";
 
 @Component({
   selector: "Comment",
   templateUrl: "comment.html"
 })
-export class commentComponent {
+export class commentComponent  implements OnInit {
+
+  constructor(private newTextCommunicationService: newTextCommunicationService,
+    private timelineCommunicationService: timelineCommunicationService) { }
+
+  ngOnInit(): void {
+    this.newTextCommunicationService.getTitlesFromServer().toPromise();
+   
+  }
 
   selectStart: Number = new Number();
   selectEnd: Number = new Number();

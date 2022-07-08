@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -33,7 +34,8 @@ import { timelineCommunicationService } from './services/timelineCommunicationSe
     { path: 'comment', component: commentComponent, pathMatch: 'full' },
     { path: 'createtext', component: createTextComponent, pathMatch: 'full' },
     { path: 'deletetext', component: deleteTextComponent, pathMatch: 'full' }
-  ])
+    ]),
+    HttpClientModule
   ],
   providers: [newTextCommunicationService, timelineCommunicationService],
   bootstrap: [AppComponent]
