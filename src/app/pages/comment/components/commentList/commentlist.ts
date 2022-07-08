@@ -1,5 +1,5 @@
 
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
@@ -11,6 +11,12 @@ import { title } from "../../../../models/title";
 export class commentlistComponent implements OnChanges, OnInit {
   ngOnInit(): void {
 
+  }
+  constructor(
+    private cdref: ChangeDetectorRef) { }
+  ngAfterViewInit() {
+
+    Promise.resolve().then(() => this.cdref.detectChanges());
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -38,8 +44,8 @@ export class commentlistComponent implements OnChanges, OnInit {
 
 
   //Send selected text between child components
-  @Input('selectedText') selectedText: string | undefined
-  @Output() selectedTextChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input('selectedText') selectedText: String = new String();
+  @Output() selectedTextChange: EventEmitter<String> = new EventEmitter<String>();
 
   selectedTextChangeFun() {
     this.selectedTextChange.emit(this.selectedText);

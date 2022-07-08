@@ -11,7 +11,7 @@ import { AfterContentChecked,AfterViewChecked } from '@angular/core';
 export class titleSearchComponent implements OnChanges, OnInit {
   constructor(
     private cdref: ChangeDetectorRef) { }
-  loading = true;
+
   ngOnInit(): void {
     //TESTING!!
     this.selectStart = 5;
@@ -27,7 +27,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
 
     for (let property in changes) {
       if(property == "selectStart")
-      console.log("Child detecting change. Value is now " + (changes[property].currentValue))
+      console.log("Child 1 detecting change. Value is now " + (changes[property].currentValue))
     }
  
   } 
@@ -44,16 +44,16 @@ export class titleSearchComponent implements OnChanges, OnInit {
 
   @Output() selectEndChange: EventEmitter<Number> = new EventEmitter<Number>();
   selectEndChangeFun() {
-    this.selectEndChange.emit(this.selectEnd);
+    this.selectEndChange.emit(this.selectEnd.valueOf());
   }
 
 
   //Send selected text between child components
-  @Input('selectedText') selectedText: string | undefined
-  @Output() selectedTextChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input('selectedText') selectedText:String = new String();
+  @Output() selectedTextChange: EventEmitter<String> = new EventEmitter<String>();
 
   selectedTextChangeFun() {
-    this.selectedTextChange.emit(this.selectedText);
+    this.selectedTextChange.emit(this.selectedText.valueOf());
   }
 
 

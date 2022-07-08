@@ -13,13 +13,13 @@ export class commentComponent {
 
   selectStart: Number = new Number();
   selectEnd: Number = new Number();
-  selectedText: string | undefined;
+  selectedText: String = new String();
   commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array < tidslinjeCommandWrapper >()
   tidslinjerList: Array<tidslinje> = new Array<tidslinje>()
   titleList: Array<title> = new Array<title>()
 
   selectStartChange1(selectedStart : Number) {
-    console.log("Parent received number " + selectedStart.valueOf());
+    console.log("Parent received number from child 1: " + selectedStart.valueOf());
 
     this.selectStart = selectedStart.valueOf() + 1;
     console.log("Parent changing this number to " + this.selectStart.valueOf())
@@ -49,16 +49,21 @@ export class commentComponent {
 
   }
 
-  selectedTextChange1(selectedText: string) {
+  selectedTextChange1(selectedText: String) {
 
   }
-  selectedTextChange2(selectedText: string) {
+  selectedTextChange2(selectedText: String) {
+    console.log("Parent received text from child 2: " + selectedText.valueOf());
+
+    this.selectedText = selectedText.valueOf() + " parrent added this ";
+    console.log("Parent changing this number to " + this.selectStart.valueOf())
 
   }
-  selectedTextChange3(selectedText: string) {
+  selectedTextChange3(selectedText: String) {
+
 
   }
-  selectedTextChange4(selectedText: string) {
+  selectedTextChange4(selectedText: String) {
 
   }
 
