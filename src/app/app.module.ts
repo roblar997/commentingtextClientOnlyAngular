@@ -10,6 +10,9 @@ import { commentSearchInfoComponent } from './pages/comment/components/commentSe
 import { titleSearchComponent } from './pages/comment/components/titleSearch/titleSearch';
 import { createTextComponent } from './pages/createText/createText';
 import { deleteTextComponent } from './pages/deleteText/deleteText';
+import { newTextCommunicationService } from './services/newTextCommunicationService';
+import { timelineCommunicationService } from './services/timelineCommunicationService';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +35,7 @@ import { deleteTextComponent } from './pages/deleteText/deleteText';
     { path: 'deletetext', component: deleteTextComponent, pathMatch: 'full' }
   ])
   ],
-  providers: [],
+  providers: [newTextCommunicationService, timelineCommunicationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

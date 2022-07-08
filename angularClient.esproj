@@ -13,7 +13,6 @@
     <Folder Include="src\app\pages\comment\components\titleSearch\" />
     <Folder Include="src\app\pages\createText\components\" />
     <Folder Include="src\app\pages\deleteText\components\" />
-    <Folder Include="src\app\services\" />
     <Folder Include="src\app\forms\" />
   </ItemGroup>
 </Project>
