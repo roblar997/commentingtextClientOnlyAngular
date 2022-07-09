@@ -14,6 +14,7 @@ import { deleteTextComponent } from './pages/deleteText/deleteText';
 import { newTextCommunicationService } from './services/newTextCommunicationService';
 import { timelineCommunicationService } from './services/timelineCommunicationService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { changeCommentModal } from './pages/comment/modal/changeCommentModal';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [newTextCommunicationService, timelineCommunicationService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [changeCommentModal]
 })
 export class AppModule { }
