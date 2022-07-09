@@ -32,6 +32,7 @@ export class commentComponent  implements OnInit {
   commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array < tidslinjeCommandWrapper >()
   tidslinjerList: Array<tidslinje> = new Array<tidslinje>()
   titleList: Array<String> = new Array<String>()
+  currentTitle: title = new title();
 
   selectStartChange1(selectedStart : Number) {
     console.log("Parent received number from child 1: " + selectedStart.valueOf());
@@ -120,5 +121,19 @@ export class commentComponent  implements OnInit {
   titleListChange4(titleList: Array<String>) {
 
   }
- 
+
+  titleChange1(title: title) {
+    this.currentTitle = title;
+    console.log("Parent detected that child 1 changed title to " + JSON.stringify(this.currentTitle))
+  
+  }
+  titleChange2(title: title) {
+
+  }
+  titleChange3(title: title) {
+
+  }
+  titleChange4(title: title) {
+
+  }
 }

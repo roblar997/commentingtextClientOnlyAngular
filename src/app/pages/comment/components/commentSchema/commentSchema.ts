@@ -78,6 +78,13 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   titleListChangeFun() {
     this.titleListChange.emit(this.titleList);
   }
+  //Current title
+  @Input('currentTitle') currentTitle: title = new title();
+  @Output() currentTitleChange: EventEmitter<title> = new EventEmitter<title>();
+
+  titleChangeFun() {
+    this.currentTitleChange.emit(this.currentTitle);
+  }
 }
 
 

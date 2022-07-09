@@ -3,14 +3,17 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
-import { AfterContentChecked,AfterViewChecked } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked } from '@angular/core';
+import { newTextCommunicationService } from '../../../../services/newTextCommunicationService';
+import { timelineCommunicationService } from '../../../../services/timelineCommunicationService';
 @Component({
   selector: "titlesearch",
   templateUrl: "titleSearch.html"
 })
 export class titleSearchComponent implements OnChanges, OnInit {
   constructor(
-    private cdref: ChangeDetectorRef) { }
+    private cdref: ChangeDetectorRef,private newTextCommunicationService: newTextCommunicationService,
+    private timelineCommunicationService: timelineCommunicationService) { }
 
   ngOnInit(): void {
     //TESTING!!
@@ -50,7 +53,15 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @ViewChild("btnGetText") btnGetText!: ElementRef;
 
   loadText() {
-    console.log("Loading text equal to" + this.titleselectTitles.nativeElement.value);
+    let titleAsText : String = this.titleselectTitles.nativeElement.value;
+
+    this.newTextCommunicationService.getText(titleAsText).subscribe((res) => {
+      console.log("Child 1 got following title from server: " + JSON.stringify(res))
+      this.currentTitle = res;
+          //Broadcast change by sending notification to parrent, such that
+    //parent can broadcast change
+      this.titleChangeFun();
+    });
   }
   @Input('selectEnd') selectEnd: Number = new Number();
 
@@ -92,5 +103,13 @@ export class titleSearchComponent implements OnChanges, OnInit {
 
   titleListChangeFun() {
     this.titleListChange.emit(this.titleList);
+  }
+
+  //Current title
+  @Input('currentTitle') currentTitle: title = new title();
+  @Output() currentTitleChange: EventEmitter<title> = new EventEmitter<title>();
+
+  titleChangeFun() {
+    this.currentTitleChange.emit(this.currentTitle);
   }
 }
