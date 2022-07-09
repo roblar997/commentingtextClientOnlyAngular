@@ -34,7 +34,15 @@ export class commentlistComponent implements OnChanges, OnInit {
     this.selectStartChange.emit(this.selectStart);
   }
 
-
+  highlightText(id: Number) {
+    console.log("Started function to highlight by id " + id.valueOf())
+  }
+  getChangbox(id: Number) {
+    console.log("Started function to change by id " + id.valueOf())
+  }
+  removeById(id: Number) {
+    console.log("Started function to remove by id " + id.valueOf())
+  }
   @Input('selectEnd') selectEnd: Number = new Number();
 
   @Output() selectEndChange: EventEmitter<Number> = new EventEmitter<Number>();
