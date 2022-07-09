@@ -13,6 +13,7 @@ import { createTextComponent } from './pages/createText/createText';
 import { deleteTextComponent } from './pages/deleteText/deleteText';
 import { newTextCommunicationService } from './services/newTextCommunicationService';
 import { timelineCommunicationService } from './services/timelineCommunicationService';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { timelineCommunicationService } from './services/timelineCommunicationSe
     { path: 'createtext', component: createTextComponent, pathMatch: 'full' },
     { path: 'deletetext', component: deleteTextComponent, pathMatch: 'full' }
     ]),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [newTextCommunicationService, timelineCommunicationService],
   bootstrap: [AppComponent]

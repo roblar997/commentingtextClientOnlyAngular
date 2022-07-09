@@ -7,12 +7,12 @@
     <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\app\pages\comment\modal\" />
     <Folder Include="src\app\pages\comment\components\commentSchema\" />
     <Folder Include="src\app\pages\comment\components\commentList\" />
     <Folder Include="src\app\pages\comment\components\commentSearchInfo\" />
     <Folder Include="src\app\pages\comment\components\titleSearch\" />
     <Folder Include="src\app\pages\createText\components\" />
     <Folder Include="src\app\pages\deleteText\components\" />
-    <Folder Include="src\app\forms\" />
   </ItemGroup>
 </Project>
