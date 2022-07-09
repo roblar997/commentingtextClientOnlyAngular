@@ -70,7 +70,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
 
   //ID'S in HTML
   @ViewChild("textToComment") textToComment!: ElementRef;
-  captureSelected(event: Event) {
+  captureSelected() {
     
     this.selectStart = this.textToComment.nativeElement.selectionStart;
     this.selectEnd = this.textToComment.nativeElement.selectionEnd;
