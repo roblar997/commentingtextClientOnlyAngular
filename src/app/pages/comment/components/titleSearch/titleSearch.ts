@@ -112,4 +112,12 @@ export class titleSearchComponent implements OnChanges, OnInit {
   titleChangeFun() {
     this.currentTitleChange.emit(this.currentTitle);
   }
+
+  //Filtered timelines
+  @Input('filteredtimelines') filteredtimelines: Array<tidslinje> = new Array<tidslinje>();
+  @Output() filteredtimelinesChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
+
+  filteredTimelinesChangeFun() {
+    this.filteredtimelinesChange.emit(this.filteredtimelines);
+  }
 }

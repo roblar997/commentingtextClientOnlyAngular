@@ -30,7 +30,10 @@ export class commentComponent  implements OnInit {
   selectEnd: Number = new Number();
   selectedText: String = new String();
   commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array < tidslinjeCommandWrapper >()
+
   tidslinjerList: Array<tidslinje> = new Array<tidslinje>()
+  filteredtimelines: Array<tidslinje> = new Array<tidslinje>()
+
   titleList: Array<String> = new Array<String>()
   currentTitle: title = new title();
 
@@ -117,7 +120,8 @@ export class commentComponent  implements OnInit {
 
   }
   titleListChange2(titleList: Array<String>) {
-
+    console.log("Parrent detects, because of child 2, that we now have folowin timelines:")
+    console.log(JSON.stringify(titleList));
   }
   titleListChange3(titleList: Array<String>) {
 
@@ -142,6 +146,20 @@ export class commentComponent  implements OnInit {
 
   }
   titleChange4(title: title) {
+
+  }
+
+  filteredTimelineListChange1(tidslinjerList: Array<tidslinje>) {
+
+  }
+  filteredTimelineListChange2(tidslinjerList: Array<tidslinje>) {
+    console.log("Parrent detected, because of child 2, that we now have these filtered timelines:")
+    console.log(JSON.stringify(tidslinjerList))
+  }
+  filteredTimelineListChange3(tidslinjerList: Array<tidslinje>) {
+
+  }
+  filteredTimelineListChange4(tidslinjerList: Array<tidslinje>) {
 
   }
 }

@@ -70,15 +70,35 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
 
   //ID'S in HTML
   @ViewChild("textToComment") textToComment!: ElementRef;
+  @ViewChild("percent") percent!: ElementRef;
+  
   captureSelected() {
     
     this.selectStart = this.textToComment.nativeElement.selectionStart;
     this.selectEnd = this.textToComment.nativeElement.selectionEnd;
     console.log("Following area is selected (start,end): (" + this.selectStart + "," + this.selectEnd + ")")
+    console.log("Percent picked up is:" + this.percent.nativeElement.value)
+
+    this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value.valueOf());
+
 
     //Send notification to parrent, such that one can broadcast this info to other childs
     this.selectStartChangeFun();
     this.selectEndChangeFun();
+    this.filteredTimelinesChangeFun();
+  }
+  filterListByTime(start: number, end: number, percent: number) {
+    return this.tidslinjerList.filter((x) => {
+      if (x.start == undefined) x.start = 0;
+      if (x.end == undefined) x.end = this.tidslinjerList.length;
+      return x.start.valueOf() >= start && x.end.valueOf() <= end && ((x.start.valueOf() - x.end.valueOf()) / (start - end)) * 100 >= percent;
+     })
+    
+  }
+  percentChange() {
+    console.log("Percent changed to:" + this.percent.nativeElement.value)
+    this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
+    this.filteredTimelinesChangeFun();
   }
 
   //When choosen a title, send timelines here
@@ -102,5 +122,13 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
 
   titleChangeFun() {
     this.currentTitleChange.emit(this.currentTitle);
+  }
+
+  //Filtered timelines
+  @Input('filteredtimelines') filteredtimelines: Array<tidslinje> = new Array<tidslinje>();
+  @Output() filteredtimelinesChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
+
+  filteredTimelinesChangeFun() {
+    this.filteredtimelinesChange.emit(this.filteredtimelines  );
   }
 }
