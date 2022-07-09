@@ -43,7 +43,9 @@ export class commentComponent  implements OnInit {
      
   }
   selectStartChange2(selectedStart: Number) {
-
+    this.selectStart = selectedStart;
+    console.log("Parrent detected change in selected start point, from child 2, in text selection")
+    console.log("Current start value is now: " + this.selectStart);
   }
   selectStartChange3(selectedStart: Number) {
 
@@ -56,7 +58,9 @@ export class commentComponent  implements OnInit {
 
   }
   selectEndChange2(selectedEnd: Number) {
-
+    this.selectEnd = selectedEnd;
+    console.log("Parrent detected change in selected end point, from child 2, in text selection")
+    console.log("Current end value is now: " + this.selectEnd);
   }
   selectEndChange3(selectedEnd: Number) {
 
@@ -125,7 +129,11 @@ export class commentComponent  implements OnInit {
   titleChange1(title: title) {
     this.currentTitle = title;
     console.log("Parent detected that child 1 changed title to " + JSON.stringify(this.currentTitle))
-  
+
+    this.timelineCommunicationService.getInitPState(this.currentTitle.id).subscribe((res) => {
+      this.tidslinjerList = res;
+      console.log("Parrent got following beginning state (timelines " + JSON.stringify(this.tidslinjerList));
+    });
   }
   titleChange2(title: title) {
 

@@ -1,5 +1,5 @@
 
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
@@ -26,12 +26,18 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     for (let property in changes) {
       if (property == "selectedText")
         console.log("Child 2 detecting change. Value is now " + (changes[property].currentValue))
+
+      else if (property == "tidslinjerList")
+        console.log("Child 2 detecting change. Value is now " + (JSON.stringify(changes[property].currentValue)))
     }
   } 
   //Get change in start and end of selection of text
   @Input('selectStart') selectStart: Number = new Number();
   @Output() selectStartChange: EventEmitter<Number> = new EventEmitter<Number>();
 
+  getSelectedArea() {
+
+  }
   selectStartChangeFun() {
     this.selectStartChange.emit(this.selectStart);
   }
@@ -62,6 +68,18 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     this.commandTidslinjeWrapperChange.emit(this.commandTidslinjeWrapper);
   }
 
+  //ID'S in HTML
+  @ViewChild("textToComment") textToComment!: ElementRef;
+  captureSelected(event: Event) {
+    
+    this.selectStart = this.textToComment.nativeElement.selectionStart;
+    this.selectEnd = this.textToComment.nativeElement.selectionEnd;
+    console.log("Following area is selected (start,end): (" + this.selectStart + "," + this.selectEnd + ")")
+
+    //Send notification to parrent, such that one can broadcast this info to other childs
+    this.selectStartChangeFun();
+    this.selectEndChangeFun();
+  }
 
   //When choosen a title, send timelines here
   @Input('tidslinjerList') tidslinjerList: Array<tidslinje> = new Array<tidslinje>();
