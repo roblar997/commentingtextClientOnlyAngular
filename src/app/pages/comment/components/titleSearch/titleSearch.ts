@@ -1,5 +1,5 @@
 
-import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
@@ -45,7 +45,13 @@ export class titleSearchComponent implements OnChanges, OnInit {
     this.selectStartChange.emit(this.selectStart.valueOf());
   }
 
+  //ID's used in HTML
+  @ViewChild("titleselectTitles") titleselectTitles!: ElementRef;
+  @ViewChild("btnGetText") btnGetText!: ElementRef;
 
+  loadText() {
+    console.log("Loading text equal to" + this.titleselectTitles.nativeElement.value);
+  }
   @Input('selectEnd') selectEnd: Number = new Number();
 
   @Output() selectEndChange: EventEmitter<Number> = new EventEmitter<Number>();
