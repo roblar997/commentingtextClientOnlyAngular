@@ -27,10 +27,16 @@ export class titleSearchComponent implements OnChanges, OnInit {
 
     for (let property in changes) {
       if(property == "selectStart")
-      console.log("Child 1 detecting change. Value is now " + (changes[property].currentValue))
+        console.log("Child 1 detecting change. Value is now " + (changes[property].currentValue))
+
+      if (property == "titleList") {
+        console.log("Child 1 detecting change. Have a title list equal to" + (changes[property].currentValue))
+
+      }
     }
  
-  } 
+  }
+
   //Get change in start and end of selection of text
   @Input('selectStart') selectStart: Number = new Number();
   @Output() selectStartChange: EventEmitter<Number> = new EventEmitter<Number>();
@@ -75,8 +81,8 @@ export class titleSearchComponent implements OnChanges, OnInit {
   }
 
   //When entering website, load all titles.
-  @Input('titleList') titleList: Array<title> = new Array<title>();
-  @Output() titleListChange: EventEmitter<Array<title>> = new EventEmitter<Array<title>>();
+  @Input('titleList') titleList: Array<String> = new Array<String>();
+  @Output() titleListChange: EventEmitter<Array<String>> = new EventEmitter<Array<String>>();
 
   titleListChangeFun() {
     this.titleListChange.emit(this.titleList);

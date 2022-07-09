@@ -72,8 +72,8 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   }
 
   //When entering website, load all titles.
-  @Input('titleList') titleList: Array<title> = new Array<title>();
-  @Output() titleListChange: EventEmitter<Array<title>> = new EventEmitter<Array<title>>();
+  @Input('titleList') titleList: Array<String> = new Array<String>();
+  @Output() titleListChange: EventEmitter<Array<String>> = new EventEmitter<Array<String>>();
 
   titleListChangeFun() {
     this.titleListChange.emit(this.titleList);

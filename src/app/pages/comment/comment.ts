@@ -17,7 +17,12 @@ export class commentComponent  implements OnInit {
     private timelineCommunicationService: timelineCommunicationService) { }
 
   ngOnInit(): void {
-    this.newTextCommunicationService.getTitlesFromServer().toPromise();
+    this.newTextCommunicationService.getTitlesFromServer().subscribe((res) => {
+
+      //Because components subscribes on this, it will trigger
+      //onchange in child components
+      this.titleList = res;
+    });
    
   }
 
@@ -26,14 +31,14 @@ export class commentComponent  implements OnInit {
   selectedText: String = new String();
   commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array < tidslinjeCommandWrapper >()
   tidslinjerList: Array<tidslinje> = new Array<tidslinje>()
-  titleList: Array<title> = new Array<title>()
+  titleList: Array<String> = new Array<String>()
 
   selectStartChange1(selectedStart : Number) {
     console.log("Parent received number from child 1: " + selectedStart.valueOf());
 
     this.selectStart = selectedStart.valueOf() + 1;
     console.log("Parent changing this number to " + this.selectStart.valueOf())
-    
+
      
   }
   selectStartChange2(selectedStart: Number) {
@@ -103,16 +108,16 @@ export class commentComponent  implements OnInit {
 
   }
 
-titleListChange1(titleList: Array<title>) {
+  titleListChange1(titleList: Array<String>) {
 
   }
-titleListChange2(titleList: Array<title>) {
+  titleListChange2(titleList: Array<String>) {
 
   }
-titleListChange3(titleList: Array<title>) {
+  titleListChange3(titleList: Array<String>) {
 
   }
-titleListChange4(titleList: Array<title>) {
+  titleListChange4(titleList: Array<String>) {
 
   }
  
