@@ -155,6 +155,7 @@ export class commentComponent  implements OnInit {
   filteredTimelineListChange2(tidslinjerList: Array<tidslinje>) {
     console.log("Parrent detected, because of child 2, that we now have these filtered timelines:")
     console.log(JSON.stringify(tidslinjerList))
+    this.filteredtimelines = tidslinjerList
   }
   filteredTimelineListChange3(tidslinjerList: Array<tidslinje>) {
 

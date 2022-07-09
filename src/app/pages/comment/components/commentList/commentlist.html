@@ -14,8 +14,25 @@
     <div id="commentHighlight" style="overflow-y: auto;width:320px; height:220px; margin-top: 10px" readonly> </div>
 
     <div id="comments" class="container"></div>
+    <div *ngFor="let filteredtimeline of filteredtimelines; let indexVal = index;" class="card bg-outline-info text-dark  mt-5" id='{{filteredtimeline.id}}'>
 
+      <div class="card-body">
 
+        <p style="width: 50%;background-color:lightskyblue"><strong>Commenting</strong>:</p>
+        <p> <strong>id</strong>: {{filteredtimeline.id}}</p>
+        <p><strong>user</strong>: {{filteredtimeline.user}}</p>
+        <p> <strong>timestampCreated</strong>:{{filteredtimeline.timestampCreated}} </p>
+        <p> <strong>timestampChanged</strong>:{{filteredtimeline.timestampChanged}}</p>
+        <p><strong> text</strong>:  {{filteredtimeline.text}}</p>
+        <p> <strong>like</strong>: {{filteredtimeline.like}}</p>
+        <p> <strong>dislike</strong>: {{filteredtimeline.dislike}}  </p>
+        <p> <strong>deleted</strong>: {{filteredtimeline.isdeleted}}</p>
+        <button type="button" class="btn btn-info col-2 m-1 p-1">Highlight commented text</button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-warning col-1 m-1 p-1">Change</button>
+        <button type="button" class="btn btn-danger col-1 m-1 p-1">Remove</button>
+
+      </div>
+    </div>
   </div>
 </body>
 </html>
