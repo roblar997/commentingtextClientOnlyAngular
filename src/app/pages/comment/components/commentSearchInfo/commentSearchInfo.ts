@@ -43,13 +43,18 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
       else if (property == "currentTitle") {
         this.likes = 0
         this.dislikes = 0
-        this.currentFenwick = new FenwFeatureTree(this.currentTitle.text.length);
-        this.tidslinjerList.forEach((x) => { 
-          if(x.start && x.end){
-             this.currentFenwick.addTimeline(x.start.valueOf(), x.end.valueOf())
-          }})
-        this.countingList = this.currentFenwick.getCountingList(0, this.currentTitle.text.length);
-        console.log("Have following counting list: " + this.countingList);
+        if (this.currentTitle && this.currentTitle.text) {
+          this.currentFenwick = new FenwFeatureTree(this.currentTitle.text.length);
+          this.tidslinjerList.forEach((x) => {
+            if (x.start && x.end) {
+              this.currentFenwick.addTimeline(x.start.valueOf(), x.end.valueOf())
+            }
+          })
+
+          this.countingList = this.currentFenwick.getCountingList(0, this.currentTitle.text.length);
+          console.log("Have following counting list: " + this.countingList);
+        }
+     
       }
       else if (property == "tidslinjerList")
         console.log("Child 2 detecting change. Value is now " + (JSON.stringify(changes[property].currentValue)))

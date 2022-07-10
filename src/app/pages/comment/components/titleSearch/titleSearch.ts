@@ -16,7 +16,8 @@ export class titleSearchComponent implements OnChanges, OnInit {
     private timelineCommunicationService: timelineCommunicationService) { }
 
   ngOnInit(): void {
-   
+    //TESTING!!
+
   }
   ngAfterViewInit() {
  
@@ -30,7 +31,12 @@ export class titleSearchComponent implements OnChanges, OnInit {
       if(property == "selectStart")
         console.log("Child 1 detecting change. Value is now " + (changes[property].currentValue))
 
-      if (property == "titleList") {
+      else if (property == "titleList") {
+        console.log("Child 1 detecting change. Have a title list equal to" + (changes[property].currentValue))
+
+      }
+
+      else if (property == "currentTitle") {
         console.log("Child 1 detecting change. Have a title list equal to" + (changes[property].currentValue))
 
       }
