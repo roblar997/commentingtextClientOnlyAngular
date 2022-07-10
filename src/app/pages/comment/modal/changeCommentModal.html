@@ -32,7 +32,7 @@
 
   <div class="modal-footer">
 
-    <button type="button" class="btn btn-success" (click)="resultChange(); modal.close('ok')">Change</button>
+    <button type="button" [disabled]="this.changeSchema.controls['likedislikeother'].status=='INVALID' || this.changeSchema.controls['text'].status=='INVALID' || this.changeSchema.controls['user'].status=='INVALID'" class="btn btn-success" (click)="resultChange(); modal.close('ok')">Change</button>
     <button type="button" class="btn btn-secondary" (click)="modal.close('close')">Close</button>
   </div>
 
