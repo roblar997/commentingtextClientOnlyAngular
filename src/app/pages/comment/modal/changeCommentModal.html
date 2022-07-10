@@ -24,7 +24,7 @@
   </div>
   <div class="modal-footer">
 
-    <button type="button" class="btn btn-success" (click)="resultChange()">Change</button>
+    <button type="button" class="btn btn-success" (click)="resultChange(); modal.close('ok')">Change</button>
     <button type="button" class="btn btn-secondary" (click)="modal.close('close')">Close</button>
   </div>
 </div>

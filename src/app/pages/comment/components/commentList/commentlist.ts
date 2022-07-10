@@ -51,7 +51,10 @@ export class commentlistComponent implements OnChanges, OnInit {
 
     })
     modalRef.result.then(retur => {
-      console.log("Modal is closed. List component received form data " + JSON.stringify(modalRef.componentInstance.tidslinjechange));
+      if(retur=="ok")
+        console.log("Modal is closed. List component received form data " + JSON.stringify(modalRef.componentInstance.tidslinjechange));
+      else
+        console.log("Modal closed without change")
     });
 
 
