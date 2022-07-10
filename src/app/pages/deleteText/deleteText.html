@@ -26,8 +26,11 @@
 
     <div class="container">
       <p class="h3" style="margin-top: 10px">Text titles </p>
-      <select id="selectTitles" style="width:150px; margin-top: 10px"> </select> <br>
-      <button id="deleteText" class="btn btn-danger my-3 ">Delete text </button> <br>
+      <select #titleselectTitles style="width:150px; margin-top: 10px">
+        <option *ngFor="let tittel of titleList; let indexVal = index;" value='{{tittel}}'> {{tittel}}</option>";
+      </select>
+      <br />
+      <button id="deleteText" (click)="deleteText()" class="btn btn-danger my-3 ">Delete text </button> <br>
     </div>
 
 
