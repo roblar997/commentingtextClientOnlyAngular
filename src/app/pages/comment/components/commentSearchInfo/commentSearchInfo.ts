@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChange
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
+import { FenwFeatureTree } from "../../../../structureClasses/FenwFeatureTree";
 
 @Component({
   selector: "commentsearchinfo",
@@ -39,7 +40,17 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     for (let property in changes) {
       if (property == "selectedText")
         console.log("Child 2 detecting change. Value is now " + (changes[property].currentValue))
-
+      else if (property == "currentTitle") {
+        this.likes = 0
+        this.dislikes = 0
+        this.currentFenwick = new FenwFeatureTree(this.currentTitle.text.length);
+        this.tidslinjerList.forEach((x) => { 
+          if(x.start && x.end){
+             this.currentFenwick.addTimeline(x.start.valueOf(), x.end.valueOf())
+          }})
+        this.countingList = this.currentFenwick.getCountingList(0, this.currentTitle.text.length);
+        console.log("Have following counting list: " + this.countingList);
+      }
       else if (property == "tidslinjerList")
         console.log("Child 2 detecting change. Value is now " + (JSON.stringify(changes[property].currentValue)))
     }
@@ -105,6 +116,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     this.selectEndChangeFun();
     this.filteredTimelinesChangeFun();
   }
+
   filterListByTime(start: number, end: number, percent: number) {
     return this.tidslinjerList.filter((x) => {
       if (x.start == undefined) x.start = 0;
@@ -141,9 +153,11 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
   @Input('currentTitle') currentTitle: title = new title();
   @Output() currentTitleChange: EventEmitter<title> = new EventEmitter<title>();
 
+  currentFenwick!: FenwFeatureTree;
+  countingList!: number[]
+
   titleChangeFun() {
-    this.likes = 0
-    this.dislikes =0
+
     this.currentTitleChange.emit(this.currentTitle);
   }
 

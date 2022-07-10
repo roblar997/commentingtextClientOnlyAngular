@@ -16,7 +16,7 @@
       <span style="background-color: lightskyblue; color: black">{{currentTitle.text.substring(highlightetcommentstart.valueOf(),highlightetcommentend.valueOf())}}</span>
       <span style="background-color:white ; color:black">{{currentTitle.text.substring(highlightetcommentend.valueOf(),currentTitle.text.length)}}</span>
     </div>
-
+    
     <div id="comments" class="container"></div>
     <div *ngFor="let filteredtimeline of filteredtimelines; let indexVal = index" class="card bg-outline-info text-dark  mt-5" id='{{filteredtimeline.id}}'>
 

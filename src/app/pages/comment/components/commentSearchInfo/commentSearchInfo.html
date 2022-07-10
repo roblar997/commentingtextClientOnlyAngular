@@ -39,7 +39,18 @@
       <input type="text" id="dislikes" readonly style="border:0; color:black; font-weight:bold;">
     </p>
     <p class="h3" style="margin-top: 10px">Color map of comment density </p>
-    <div id="textDensityMap" style="overflow-y: auto; width:320px; height:320px; margin-top: 10px" readonly> ..</div>
+    <div id="textDensityMap" style="overflow-y: auto; width:320px; height:320px; margin-top: 10px" readonly>
+      <span *ngFor="let value of countingList; let indexVal = index;">
+        <span></span>
+        <span *ngIf="value.valueOf() >= 32" style='background-color:red'>{{currentTitle.text[indexVal]}}</span>
+        <span *ngIf="value.valueOf() >= 16 && value.valueOf() < 32" style='background-color: yellow'>{{currentTitle.text[indexVal]}}</span>
+        <span *ngIf="value.valueOf() >= 8  && value.valueOf() < 16" style='background-color: lightyellow'>{{currentTitle.text[indexVal]}}</span>
+        <span *ngIf="value.valueOf() >= 4 && value.valueOf() < 8" style='background-color: green'>{{currentTitle.text[indexVal]}}</span>
+        <span *ngIf="value.valueOf() >= 2 && value.valueOf() < 4" style='background-color: lightgreen'>{{currentTitle.text[indexVal]}}</span>
+        <span *ngIf="value.valueOf() >= 1 && value.valueOf() < 2" style='background-color: lightskyblue'>{{currentTitle.text[indexVal]}}</span>
+        <span *ngIf="value.valueOf() == 0" style='background-color:white'>{{currentTitle.text[indexVal]}}</span>
+      </span>
+    </div>
 
   </div>
 </body>
