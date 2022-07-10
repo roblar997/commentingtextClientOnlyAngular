@@ -15,6 +15,7 @@ import { newTextCommunicationService } from './services/newTextCommunicationServ
 import { timelineCommunicationService } from './services/timelineCommunicationService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { changeCommentModal } from './pages/comment/modal/changeCommentModal';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { changeCommentModal } from './pages/comment/modal/changeCommentModal';
     commentlistComponent,
     commentSchemaComponent,
     commentSearchInfoComponent,
-    titleSearchComponent
+    titleSearchComponent,
+    changeCommentModal
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { changeCommentModal } from './pages/comment/modal/changeCommentModal';
     { path: 'createtext', component: createTextComponent, pathMatch: 'full' },
     { path: 'deletetext', component: deleteTextComponent, pathMatch: 'full' }
     ]),
+    FormsModule,
     HttpClientModule,
     BrowserAnimationsModule
   ],

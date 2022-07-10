@@ -1,8 +1,11 @@
 
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
+import { changeCommentModal } from "../../modal/changeCommentModal";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: "commentlist",
@@ -12,8 +15,9 @@ export class commentlistComponent implements OnChanges, OnInit {
   ngOnInit(): void {
 
   }
-  constructor(
-    private cdref: ChangeDetectorRef) { }
+  constructor(private cdref: ChangeDetectorRef,private modalService: NgbModal) {
+
+  }
   ngAfterViewInit() {
 
     Promise.resolve().then(() => this.cdref.detectChanges());
@@ -39,6 +43,15 @@ export class commentlistComponent implements OnChanges, OnInit {
   }
   getChangbox(id: Number) {
     console.log("Started function to change by id " + id.valueOf())
+
+    const modalRef = this.modalService.open(changeCommentModal, {
+
+      backdrop: 'static',
+      keyboard: false
+
+    });
+
+
   }
   removeById(id: Number) {
     console.log("Started function to remove by id " + id.valueOf())
