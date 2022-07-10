@@ -9,7 +9,8 @@
     </div>
     <div class="form-group">
       <label for="commentComment"> Comment: </label>
-      <input type="text" [(ngModel)]="tidslinjechange.text" class="form-control input-sm w-50" id="commentCommentChange" placeholder="Comment" rows="10"/>
+      <textarea [(ngModel)]="tidslinjechange.text" class="form-control input-sm w-50" id="commentCommentChange" placeholder="Comment" rows="10">
+      </textarea>
     </div>
 
     <div class="form-group">
@@ -24,6 +25,6 @@
   <div class="modal-footer">
 
     <button type="button" class="btn btn-success" (click)="resultChange()">Change</button>
-    <button type="button" class="btn btn-secondary" (click)="modal.close(tidslinjechange)">Close</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.close('close')">Close</button>
   </div>
 </div>
