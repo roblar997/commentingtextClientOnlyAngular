@@ -96,7 +96,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   changeTimeline(id: Number, formdata: tidslinjeChangeForm) {
     let tidslinjen: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
 
-    let tidslinjen2: tidslinje = new tidslinje(tidslinjen.id, tidslinjen.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, tidslinjen.text, tidslinjen.like, tidslinjen.dislike, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+    let tidslinjen2: tidslinje = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, tidslinjen.like, tidslinjen.dislike, tidslinjen.isdeleted, tidslinjen.texttocommentid);
     this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => { console.log("leaved change service") });
   }
 
