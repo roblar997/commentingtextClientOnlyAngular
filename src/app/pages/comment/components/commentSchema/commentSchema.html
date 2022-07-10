@@ -10,15 +10,9 @@
 
   
   <div id="isCommenting" style="overflow-y: auto;width:320px; height:220px; margin-top: 10px" readonly>
-    <span style="background-color:white ; color:black">
-      {{currentTitle.text.substring(0,selectStart.valueOf())}}
-    </span>
-    <span style="background-color: lightskyblue; color: black">
-      {{currentTitle.text.substring(selectStart.valueOf(),selectEnd.valueOf())}}
-    </span>
-    <span style="background-color:white ; color:black">
-      {{currentTitle.text.substring(selectEnd.valueOf(),currentTitle.text.length)}}
-    </span>
+    <span style="background-color:white ; color:black">{{currentTitle.text.substring(0,selectStart.valueOf())}}</span>
+    <span style="background-color: lightskyblue; color: black">{{currentTitle.text.substring(selectStart.valueOf(),selectEnd.valueOf())}}</span>
+    <span style="background-color:white ; color:black">{{currentTitle.text.substring(selectEnd.valueOf(),currentTitle.text.length)}}</span>
     
   </div>
     <p class="h3" style="margin-top: 10px">Create a comment </p>
