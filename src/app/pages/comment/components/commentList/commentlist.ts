@@ -6,6 +6,7 @@ import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrap
 import { title } from "../../../../models/title";
 import { changeCommentModal } from "../../modal/changeCommentModal";
 import { FormsModule } from '@angular/forms';
+import { tidslinjeChangeForm } from "../../../../models/tidslinjeChangeForm";
 
 @Component({
   selector: "commentlist",
@@ -51,14 +52,22 @@ export class commentlistComponent implements OnChanges, OnInit {
 
     })
     modalRef.result.then(retur => {
-      if(retur=="ok")
+      if (retur == "ok") {
         console.log("Modal is closed. List component received form data " + JSON.stringify(modalRef.componentInstance.tidslinjechange));
+        this.changeTimeline(id, modalRef.componentInstance.tidslinjechange);
+      }
+       
+
       else
         console.log("Modal closed without change")
     });
 
 
   }
+  changeTimeline(id: Number, formdata: tidslinjeChangeForm) {
+    console.log("Now changing timeline with id " + id);
+  }
+
   removeById(id: Number) {
     console.log("Started function to remove by id " + id.valueOf())
   }
