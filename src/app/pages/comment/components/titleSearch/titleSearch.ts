@@ -16,9 +16,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
     private timelineCommunicationService: timelineCommunicationService) { }
 
   ngOnInit(): void {
-    //TESTING!!
-    this.selectStart = 5;
-    this.selectStartChangeFun()
+   
   }
   ngAfterViewInit() {
  
