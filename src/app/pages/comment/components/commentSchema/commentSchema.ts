@@ -1,5 +1,6 @@
 
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
@@ -13,8 +14,15 @@ export class commentSchemaComponent implements OnChanges, OnInit {
     //TESTING!!
     this.selectStartChangeFun()
   }
+  commentSchema: FormGroup;
   constructor(
-    private cdref: ChangeDetectorRef) { }
+    private cdref: ChangeDetectorRef, private fb: FormBuilder) {
+    this.commentSchema = fb.group({
+      user: ["", Validators.required],
+      text: ["", Validators.required],
+      likedislikeother: ["", Validators.required]
+    });
+  }
   ngAfterViewInit() {
 
     Promise.resolve().then(() => this.cdref.detectChanges());
