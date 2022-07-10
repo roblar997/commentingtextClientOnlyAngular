@@ -15,7 +15,7 @@ import { newTextCommunicationService } from './services/newTextCommunicationServ
 import { timelineCommunicationService } from './services/timelineCommunicationService';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { changeCommentModal } from './pages/comment/modal/changeCommentModal';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -40,6 +40,7 @@ import { FormsModule } from '@angular/forms';
     { path: 'deletetext', component: deleteTextComponent, pathMatch: 'full' }
     ]),
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule
   ],

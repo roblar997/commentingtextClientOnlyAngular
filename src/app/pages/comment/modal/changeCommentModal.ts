@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { tidslinje } from '../../../models/tidslinje';
 import { tidslinjeChangeForm } from '../../../models/tidslinjeChangeForm';
@@ -7,7 +8,16 @@ import { tidslinjeChangeForm } from '../../../models/tidslinjeChangeForm';
   templateUrl: 'changeCommentModal.html'
 })
 export class changeCommentModal {
-  constructor(public modal: NgbActiveModal) { }
+
+  changeSchema: FormGroup;
+
+  constructor(private fb: FormBuilder, public modal: NgbActiveModal) {
+    this.changeSchema = fb.group({
+      user: ["", Validators.required],
+      text: ["", Validators.required],
+      likedislikeother: ["", Validators.required]
+    });
+  }
 
   @Input() public tidslinjechange: tidslinjeChangeForm = new tidslinjeChangeForm();
   @Output() componentResult: EventEmitter<tidslinjeChangeForm> = new EventEmitter();
