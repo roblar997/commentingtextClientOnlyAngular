@@ -20,8 +20,7 @@ export class deleteTextComponent {
   ngOnInit(): void {
     this.newTextCommunicationService.getTitlesFromServer().subscribe((res) => {
 
-      //Because components subscribes on this, it will trigger
-      //onchange in child components
+
       this.titleList = res;
     });
 
