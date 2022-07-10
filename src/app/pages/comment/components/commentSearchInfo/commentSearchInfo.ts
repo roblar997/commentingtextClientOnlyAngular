@@ -112,9 +112,9 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     console.log("Following area is selected (start,end): (" + this.selectStart + "," + this.selectEnd + ")")
     console.log("Percent picked up is:" + this.percent.nativeElement.value)
 
-    this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value.valueOf());
-    this.likes = this.countLikes(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
-    this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
+    this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf());
+    this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+    this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
 
     //Send notification to parrent, such that one can broadcast this info to other childs
     this.selectStartChangeFun();
@@ -122,19 +122,21 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     this.filteredTimelinesChangeFun();
   }
 
-  filterListByTime(start: number, end: number, percent: number) {
+  filterListByTime(start: number, end: number, percent: Number) {
     return this.tidslinjerList.filter((x) => {
-      if (x.start == undefined) x.start = 0;
-      if (x.end == undefined) x.end = this.tidslinjerList.length;
-      return x.start.valueOf() >= start && x.end.valueOf() <= end && ((x.start.valueOf() - x.end.valueOf()) / (start - end)) * 100 >= percent;
-     })
+
+      if (x.start && x.end)
+        return x.start.valueOf() >= start && x.end.valueOf() <= end && ((x.start.valueOf() - x.end.valueOf()) / (start - end)) * 100 >= 10;
+      else
+        return false;
+    })
     
   }
   percentChange() {
     console.log("Percent changed to:" + this.percent.nativeElement.value)
-    this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
-    this.likes = this.countLikes(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
-    this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
+    this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+    this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+    this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
     this.filteredTimelinesChangeFun();
  
   }
