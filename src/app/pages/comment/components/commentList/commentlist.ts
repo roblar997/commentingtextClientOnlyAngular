@@ -39,8 +39,23 @@ export class commentlistComponent implements OnChanges, OnInit {
     this.selectStartChange.emit(this.selectStart);
   }
 
+  ishighlighting = false;
+  highlightetcommentstart!: Number;
+  highlightetcommentend!: Number;
+
   highlightText(id: Number) {
     console.log("Started function to highlight by id " + id.valueOf())
+    let tidslinje: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
+
+    if (tidslinje.start)
+      this.highlightetcommentstart = tidslinje.start;
+    if (tidslinje.end)
+      this.highlightetcommentend = tidslinje.end;
+
+    if (tidslinje.start && tidslinje.end )
+        this.ishighlighting = true;
+    else
+        this.ishighlighting = false;
   }
   getChangbox(id: Number) {
     console.log("Started function to change by id " + id.valueOf())
@@ -104,7 +119,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   tidslinjerListChangeFun() {
     this.tidslinjerListChange.emit(this.tidslinjerList);
   }
-
+ 
   //When entering website, load all titles.
   @Input('titleList') titleList: Array<String> = new Array<String>();
   @Output() titleListChange: EventEmitter<Array<String>> = new EventEmitter<Array<String>>();
