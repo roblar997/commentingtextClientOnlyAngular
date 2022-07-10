@@ -4,7 +4,6 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <input [(ngModel)]="tidslinjechange.id" type="hidden" id="commentIdChange" />
       <label for="commentUser"> User: </label>
       <input [(ngModel)]="tidslinjechange.user" class="form-control input-sm w-50" id="commentUserChange" placeholder=" user" /><br>
     </div>
@@ -25,6 +24,6 @@
   <div class="modal-footer">
 
     <button type="button" class="btn btn-success" (click)="resultChange()">Change</button>
-    <button type="button" class="btn btn-secondary" (click)="modal.close('nei')">Close</button>
+    <button type="button" class="btn btn-secondary" (click)="modal.close(tidslinjechange)">Close</button>
   </div>
 </div>
