@@ -20,7 +20,20 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
 
     Promise.resolve().then(() => this.cdref.detectChanges());
   }
-
+  countLikes(start: Number, end: Number, percent: Number) {
+    let timeLinesFilteredTime = this.filterListByTime(start.valueOf(), end.valueOf(), percent.valueOf());
+  return timeLinesFilteredTime.reduce((nmbLikes, timeline) => {
+    if (timeline.like) return nmbLikes + 1;
+    else return nmbLikes;
+  }, 0.0)
+}
+  countDisLikes(start: Number, end: Number, percent: Number) {
+    let timeLinesFilteredTime = this.filterListByTime(start.valueOf(), end.valueOf(), percent.valueOf());
+  return timeLinesFilteredTime.reduce((nmbDisLike, timeline) => {
+    if (timeline.dislike) return nmbDisLike + 1;
+    else return nmbDisLike;
+  }, 0.0)
+}
   ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
@@ -34,6 +47,10 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
   //Get change in start and end of selection of text
   @Input('selectStart') selectStart: Number = new Number();
   @Output() selectStartChange: EventEmitter<Number> = new EventEmitter<Number>();
+
+  //Like and dislikes
+  likes = 0;
+  dislikes = 0;
 
   getSelectedArea() {
 
@@ -80,7 +97,8 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     console.log("Percent picked up is:" + this.percent.nativeElement.value)
 
     this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value.valueOf());
-
+    this.likes = this.countLikes(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
+    this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
 
     //Send notification to parrent, such that one can broadcast this info to other childs
     this.selectStartChangeFun();
@@ -98,7 +116,10 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
   percentChange() {
     console.log("Percent changed to:" + this.percent.nativeElement.value)
     this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
+    this.likes = this.countLikes(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
+    this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.percent.nativeElement.value.valueOf(), this.percent.nativeElement.value);
     this.filteredTimelinesChangeFun();
+ 
   }
 
   //When choosen a title, send timelines here
@@ -121,6 +142,8 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
   @Output() currentTitleChange: EventEmitter<title> = new EventEmitter<title>();
 
   titleChangeFun() {
+    this.likes = 0
+    this.dislikes =0
     this.currentTitleChange.emit(this.currentTitle);
   }
 
