@@ -94,9 +94,17 @@ export class commentlistComponent implements OnChanges, OnInit {
 
   }
   changeTimeline(id: Number, formdata: tidslinjeChangeForm) {
-    let tidslinjen: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
 
-    let tidslinjen2: tidslinje = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, tidslinjen.like, tidslinjen.dislike, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+    let tidslinjen: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
+    let tidslinjen2: tidslinje =  new tidslinje(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
+
+    if (formdata.likedislikeother == "like")
+       tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, true,false, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+    else if (formdata.likedislikeother == "dislike")
+      tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, false, true, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+    else
+      tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, false, false, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+
     this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => { console.log("leaved change service") });
   }
 
