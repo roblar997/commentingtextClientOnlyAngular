@@ -9,7 +9,7 @@ import { timelineCommunicationService } from "../../services/timelineCommunicati
 })
 export class deleteTextComponent {
 
-  @Input('titleList') titleList: Array<String> = new Array<String>();
+  titleList: Array<String> = new Array<String>();
 
   constructor(private newTextCommunicationService: newTextCommunicationService,
     private timelineCommunicationService: timelineCommunicationService) { }
