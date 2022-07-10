@@ -60,12 +60,24 @@ export class commentlistComponent implements OnChanges, OnInit {
   getChangbox(id: Number) {
     console.log("Started function to change by id " + id.valueOf())
 
+    let tidslinje: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
+    let tidslinjeChangeFormen: tidslinjeChangeForm | undefined = undefined;
+
+    if (tidslinje.like)
+      tidslinjeChangeFormen = new tidslinjeChangeForm(tidslinje.user, tidslinje.text.valueOf(), "like");
+    else if (tidslinje.dislike)
+      tidslinjeChangeFormen  = new tidslinjeChangeForm(tidslinje.user, tidslinje.text.valueOf(), "dislike");
+    else 
+      tidslinjeChangeFormen  = new tidslinjeChangeForm(tidslinje.user, tidslinje.text.valueOf(), "dontknow");
+      
+    
     const modalRef = this.modalService.open(changeCommentModal, {
 
       backdrop: 'static',
       keyboard: false
 
     })
+    modalRef.componentInstance.tidslinjechange = tidslinjeChangeFormen;
     modalRef.result.then(retur => {
       if (retur == "ok") {
         console.log("Modal is closed. List component received form data " + JSON.stringify(modalRef.componentInstance.tidslinjechange));

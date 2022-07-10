@@ -19,7 +19,7 @@ export class changeCommentModal {
     });
   }
 
-  @Input() public tidslinjechange: tidslinjeChangeForm = new tidslinjeChangeForm();
+  @Input() public tidslinjechange: tidslinjeChangeForm = new tidslinjeChangeForm(undefined, undefined, undefined);
   @Output() componentResult: EventEmitter<tidslinjeChangeForm> = new EventEmitter();
 
   resultChange() {
