@@ -126,7 +126,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     return this.tidslinjerList.filter((x) => {
 
       if (x.start && x.end)
-        return x.start.valueOf() >= start && x.end.valueOf() <= end && ((x.start.valueOf() - x.end.valueOf()) / (start - end)) * 100 >= 10;
+        return x.start.valueOf() >= start && x.end.valueOf() <= end && ((x.start.valueOf() - x.end.valueOf()) / (start - end)) * 100 >= percent;
       else
         return false;
     })
