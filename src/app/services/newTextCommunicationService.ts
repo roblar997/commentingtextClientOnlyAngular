@@ -34,7 +34,8 @@ export class newTextCommunicationService {
   deletePText(title: String): Observable<any> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
     const data = JSON.stringify({ "remoteMethod": "deleteText", "title": title });
-    return this.http.post(this.baseURL, data, { 'headers': headers });
+    //return this.http.post(this.baseURL, data, { 'headers': headers });
+    return of("OK");
   }
   getTitlesFromServer(): Observable<String[]> {
     const headers = {
