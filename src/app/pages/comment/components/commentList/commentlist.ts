@@ -7,7 +7,8 @@ import { title } from "../../../../models/title";
 import { changeCommentModal } from "../../modal/changeCommentModal";
 import { FormsModule } from '@angular/forms';
 import { tidslinjeChangeForm } from "../../../../models/tidslinjeChangeForm";
-
+import { newTextCommunicationService } from "../../../../services/newTextCommunicationService";
+import { timelineCommunicationService } from "../../../../services/timelineCommunicationService";
 @Component({
   selector: "commentlist",
   templateUrl: "commentlist.html"
@@ -16,7 +17,8 @@ export class commentlistComponent implements OnChanges, OnInit {
   ngOnInit(): void {
 
   }
-  constructor(private cdref: ChangeDetectorRef,private modalService: NgbModal) {
+  constructor(private cdref: ChangeDetectorRef, private modalService: NgbModal,private newTextCommunicationService: newTextCommunicationService,
+    private timelineCommunicationService: timelineCommunicationService)  {
 
   }
   ngAfterViewInit() {
@@ -92,11 +94,15 @@ export class commentlistComponent implements OnChanges, OnInit {
 
   }
   changeTimeline(id: Number, formdata: tidslinjeChangeForm) {
-    console.log("Now changing timeline with id " + id);
+    let tidslinjen: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
+
+    let tidslinjen2: tidslinje = new tidslinje(tidslinjen.id, tidslinjen.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, tidslinjen.text, tidslinjen.like, tidslinjen.dislike, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+    this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => { console.log("leaved change service") });
   }
 
   removeById(id: Number) {
-    console.log("Started function to remove by id " + id.valueOf())
+    this.timelineCommunicationService.removePTimeLineById(id).subscribe((res) => { console.log("leaved remove service") });
+ 
   }
   @Input('selectEnd') selectEnd: Number = new Number();
 

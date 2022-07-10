@@ -27,21 +27,24 @@ export class timelineCommunicationService {
 
   sendTimePLine(timeline: tidslinje): Observable<any> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
-    const data = JSON.stringify({ "remoteMethod": "addTimeLine", "timeline": timeline });
-    return this.http.post(this.baseURL, data, { 'headers': headers });
+    const data = JSON.stringify({ "remoteMethod": "addTimeLine", "timeline": tidslinje });
+    //return this.http.post(this.baseURL, data, { 'headers': headers });
+    return of("OK");
   }
   removePTimeLineById(id: Number): Observable<any> {
     let changeTime = new Date().valueOf();
     const headers = { 'content-type': 'application/json; charset=utf-8' };
     const data = JSON.stringify({ "remoteMethod": "removeTimeline", "id": id, "timestampChanged": changeTime });
-    return this.http.post(this.baseURL, data, { 'headers': headers });
+    //return this.http.post(this.baseURL, data, { 'headers': headers });
+    return of("OK");
   }
-  changePTimeLineById(id: Number, timeline: Number): Observable<any> {
+  changePTimeLineById(id: Number, timelinen: tidslinje): Observable<any> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
-    const data = JSON.stringify({ "remoteMethod": "changeTimeline", "timeline": timeline, "id": id });
-    return this.http.post(this.baseURL, data, { 'headers': headers });
+    const data = JSON.stringify({ "remoteMethod": "changeTimeline", "timeline": tidslinje, "id": id });
+    //this.http.post(this.baseURL, data, { 'headers': headers });
+    return of("OK");
   }
-  getPChanges(texttocommentid : Number): Observable<any> {
+  getPChanges(texttocommentid: Number): Observable<any> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
     const data = JSON.stringify({ "remoteMethod": "getChanges", "texttocommentid": texttocommentid, "timestamp": this.timestamp });
     return this.http.post(this.baseURL, data, { 'headers': headers });
