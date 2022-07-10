@@ -23,8 +23,14 @@ export class changeCommentModal {
   @Output() componentResult: EventEmitter<tidslinjeChangeForm> = new EventEmitter();
 
   resultChange() {
-    console.log("Modal is detecting form is changed to" + JSON.stringify(this.tidslinjechange));
-    this.componentResult.emit(this.tidslinjechange);
+    if (this.changeSchema.valid) {
+      console.log("Modal is detecting form is changed, and validated, to" + JSON.stringify(this.tidslinjechange));
+      this.componentResult.emit(this.tidslinjechange);
+    }
+    else {
+      console.log("Modal detected form is change, but it is marked as invalid")
+    }
+   
     
   }
 }

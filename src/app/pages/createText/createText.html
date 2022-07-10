@@ -23,24 +23,26 @@
 
 
 
-
-    <div class="container">
-      <header class="h1" style=";  margin-top: 20px">Create a new text</header>
-      <div>
+    <form [formGroup]="newtextSchema">
+      <div class="container">
+        <header class="h1" style=";  margin-top: 20px">Create a new text</header>
         <div>
-          <label for="textTitle" class="h2" style=";  margin-top: 20px">Title </label><br />
-          <input type="text" placeholder="title" style="; width:210px; margin-top: 10px" id="textTitle">
+          <div>
+            <label for="textTitle" class="h2" style=";  margin-top: 20px">Title </label><br />
+            <input type="text" formControlName="title" placeholder="title" style="; width:210px; margin-top: 10px" id="textTitle">
+            <span style="color:red" *ngIf="this.newtextSchema.controls['title'].status=='INVALID'"> Wrong input</span>
+          </div>
         </div>
-      </div>
-      <div>
-        <label for="textToCreate" class="h2 " style=";  margin-top: 20px">Text to comment </label><br />
-        <textarea id="textToCreate" style="; width:320px; height:320px; margin-top: 10px"> Create a text..
+        <div>
+          <label for="textToCreate" formControlName="text" class="h2 " style=";  margin-top: 20px">Text to comment </label><br />
+          <textarea id="textToCreate" style="; width:320px; height:320px; margin-top: 10px"> Create a text..
                  </textarea>
+          <span style="color:red" *ngIf="this.newtextSchema.controls['text'].status=='INVALID'"> Wrong input</span>
+        </div>
+
+        <button id="btnAddText" (click)="addNewText()" [disabled]=" this.newtextSchema.controls['title'].status=='INVALID' || this.newtextSchema.controls['text'].status=='INVALID'"class="btn btn-success" style=";  margin-top: 20px">Submit text</button>
       </div>
-
-      <button id="btnAddText" class="btn btn-success" style=";  margin-top: 20px">Submit text</button>
-    </div>
-
+    </form>
 
 
   </main>

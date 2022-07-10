@@ -33,7 +33,13 @@ export class commentSchemaComponent implements OnChanges, OnInit {
     for (let property in changes) {
 
     }
-  } 
+  }
+
+  addNewComment() {
+    if (this.commentSchema.valid) {
+      console.log("Adding new comment")
+    }
+  }
   //Get change in start and end of selection of text
   @Input('selectStart') selectStart: Number = new Number();
 
