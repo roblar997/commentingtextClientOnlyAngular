@@ -46,11 +46,11 @@ export class commentSchemaComponent implements OnChanges, OnInit {
       let tidslinjen: tidslinje | undefined = undefined;
 
       if (this.commentSchema.value.likedislikeother=="like")
-        tidslinjen = new tidslinje(-1, this.commentSchema.value.user, new Date().valueOf(), new Date().valueOf(), this.selectStart, this.selectEnd, this.commentSchema.value.text, true, false, false, this.currentTitle.id)
+        tidslinjen = new tidslinje(-1, this.commentSchema.value.user, new Date().valueOf(), new Date().valueOf(), this.selectStart, this.selectEnd, this.commentSchema.value.text.valueOf(), true, false, false, this.currentTitle.id)
       else if (this.commentSchema.value.likedislikeother == "dislike")
-        tidslinjen = new tidslinje(-1, this.commentSchema.value.user, new Date().valueOf(), new Date().valueOf(), this.selectStart, this.selectEnd, this.commentSchema.value.text, false, true, false, this.currentTitle.id)
+        tidslinjen = new tidslinje(-1, this.commentSchema.value.user, new Date().valueOf(), new Date().valueOf(), this.selectStart, this.selectEnd, this.commentSchema.value.text.valueOf(), false, true, false, this.currentTitle.id)
       else
-        tidslinjen = new tidslinje(-1, this.commentSchema.value.user, new Date().valueOf(), new Date().valueOf(), this.selectStart, this.selectEnd, this.commentSchema.value.text, false, false, false, this.currentTitle.id)
+        tidslinjen = new tidslinje(-1, this.commentSchema.value.user, new Date().valueOf(), new Date().valueOf(), this.selectStart, this.selectEnd, this.commentSchema.value.text.valueOf(), false, false, false, this.currentTitle.id)
 
       this.timelineCommunicationService.sendTimePLine(tidslinjen).subscribe((res) => {
         console.log("leaved add service")

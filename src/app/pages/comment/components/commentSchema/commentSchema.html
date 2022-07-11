@@ -32,9 +32,9 @@
       <div class="form-group">
         <header> Do I like this part of text?</header>
         <div>
-          <label for="likeYes">Like:</label> <input formControlName="likedislikeother" type="radio" id="likeYes" name="likedislikeother">  <br>
-          <label for="dislikeYes">Dislike:</label> <input formControlName="likedislikeother" type="radio" id="dislikeYes" name="likedislikeother"><br>
-          <label for="likeDislikeNo">Don't know:</label>  <input formControlName="likedislikeother" type="radio" id="likeDislikeNo" name="likedislikeother" checked><br>
+          <label for="likeYes">Like:</label> <input formControlName="likedislikeother" value="like" type="radio" id="likeYes" name="likedislikeother">  <br>
+          <label for="dislikeYes">Dislike:</label> <input formControlName="likedislikeother" value="dislike" type="radio" id="dislikeYes" name="likedislikeother"><br>
+          <label for="likeDislikeNo">Don't know:</label>  <input formControlName="likedislikeother" value="dontknow" type="radio" id="likeDislikeNo" name="likedislikeother" checked><br>
           <span style="color:red" *ngIf="this.commentSchema.controls['likedislikeother'].status=='INVALID'"> Wrong input</span>
         </div>
 
