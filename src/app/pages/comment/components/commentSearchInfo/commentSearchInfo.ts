@@ -62,11 +62,20 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
           this.countingList = of(await this.currentFenwick.getCountingList(0, this.currentTitle.text.length));
           console.log("Have following counting list: " + this.countingList);
         }
-     
-      }
 
-      else if (property == "tidslinjerList")
-        console.log("Child 2 detecting change. Value is now " + (JSON.stringify(changes[property].currentValue)))
+      }
+      if (property == "tidslinjerList") {
+
+        console.log("Child 4 detecting change. Value is now " + (JSON.stringify(changes[property].currentValue)))
+        this.filteredtimelines = of(this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf()));
+        this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+        this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+
+        //Send notification to parrent, such that one can broadcast this info to other childs
+        this.filteredTimelinesChangeFun();
+      }
+ 
+       
     }
   } 
   //Get change in start and end of selection of text

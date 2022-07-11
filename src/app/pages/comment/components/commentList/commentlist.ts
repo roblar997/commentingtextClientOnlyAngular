@@ -32,10 +32,7 @@ export class commentlistComponent implements OnChanges, OnInit {
 
     for (let property in changes) {
 
-      if (property == "selectStart") {
-        console.log("This component detected change in start")
-
-      }
+    
       
     }
   }
