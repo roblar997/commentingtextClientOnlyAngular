@@ -53,7 +53,7 @@ export class timelineCommunicationService {
   getPChanges(texttocommentid: Number, testCommand: string, testID: number | undefined, testTidslinje: tidslinje | undefined): Observable<tidslinjeCommandWrapper[]> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
     const data = JSON.stringify({ "remoteMethod": "getChanges", "texttocommentid": texttocommentid, "timestamp": this.timestamp });
-    console.log("timestamp is - before change - "+  this.timestamp);
+    console.log("timestamp is - before change - " + this.timestamp);
     if (testID && testCommand == "REMOVE")
       return of([{ "command": "REMOVE", "tidslinje": { "id": testID, "user": "RR", "timestampCreated": 1657545938272, "timestampChanged": 1657545938272, "start": 0, "end": 10, "text": "RRR", "like": true, "dislike": false, "isdeleted": false, "texttocommentid": 1 } }
       ]).pipe((res => { this.timestamp = new Date().valueOf(); return res; }));
@@ -65,7 +65,7 @@ export class timelineCommunicationService {
     }
 
     //return this.http.post(this.baseURL, data, { 'headers': headers }).pipe((res => { this.timestamp = new Date().valueOf(); return res; }));;
-    return of([])
+    return of([{ "command": "REMOVE", "tidslinje": { "id": 65, "user": "RR", "timestampCreated": 1657545938272, "timestampChanged": 1657545938272, "start": 0, "end": 10, "text": "RRR", "like": true, "dislike": false, "isdeleted": false, "texttocommentid": 1 } }]).pipe((res => { this.timestamp = new Date().valueOf(); return res; }));
   }
 
 }

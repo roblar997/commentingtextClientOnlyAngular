@@ -157,7 +157,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
     this.commandTidslinjeWrapper.forEach((commandtidslinjen) => {
 
 
-      console.log("Got command " + commandtidslinjen.command + " with timeline:")
+      console.log("Got command " + commandtidslinjen.command + " with timeline:" + JSON.stringify(commandtidslinjen.tidslinje))
       if (String(commandtidslinjen.command) == "ADD") {
 
         this.tidslinjerList.push(JSON.parse(JSON.stringify(commandtidslinjen.tidslinje)));

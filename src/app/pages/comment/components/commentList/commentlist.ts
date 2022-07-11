@@ -27,7 +27,16 @@ export class commentlistComponent implements OnChanges, OnInit {
 
     Promise.resolve().then(() => this.cdref.detectChanges());
   }
+  async refresh() {
+    this.timelineCommunicationService.getPChanges(-1, "", undefined, undefined).subscribe((res2) => {
+      //this.doChange(res2);
+      this.commandTidslinjeWrapper = res2;
+      this.commandTidslinjeWrapperFun();
+      return;
 
+
+    });
+  }
   async ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {

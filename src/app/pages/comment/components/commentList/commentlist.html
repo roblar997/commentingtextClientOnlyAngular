@@ -9,7 +9,7 @@
   <div class="form-group centered">
 
 
-    <p class="h3">Comments       <i class="fa fa-refresh m-1" id="refreshComments"></i></p>
+    <p class="h3">Comments       <i (click)="refresh()" class="fa fa-refresh m-1" id="refreshComments"></i></p>
     <p class="h3" style="margin-top: 10px">Is a comment of following </p>
     <div id="commentHighlight" *ngIf="ishighlighting" style="overflow-y: auto;width:320px; height:220px; margin-top: 10px" readonly>
       <span style="background-color:white ; color:black">{{currentTitle.text.substring(0,highlightetcommentstart.valueOf())}}</span>
