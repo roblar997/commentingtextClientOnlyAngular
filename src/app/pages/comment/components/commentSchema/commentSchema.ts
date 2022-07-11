@@ -5,7 +5,8 @@ import { Observable } from "rxjs";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
-
+import { newTextCommunicationService } from "../../../../services/newTextCommunicationService";
+import { timelineCommunicationService } from "../../../../services/timelineCommunicationService";
 @Component({
   selector: "commentschema",
   templateUrl: "commentSchema.html"
@@ -15,9 +16,12 @@ export class commentSchemaComponent implements OnChanges, OnInit {
     //TESTING!!
     this.selectStartChangeFun()
   }
+
+
   commentSchema: FormGroup;
   constructor(
-    private cdref: ChangeDetectorRef, private fb: FormBuilder) {
+    private cdref: ChangeDetectorRef, private fb: FormBuilder,private newTextCommunicationService: newTextCommunicationService,
+    private timelineCommunicationService: timelineCommunicationService) {
     this.commentSchema = fb.group({
       user: ["", Validators.required],
       text: ["", Validators.required],
@@ -39,8 +43,66 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   addNewComment() {
     if (this.commentSchema.valid) {
       console.log("Adding new comment")
+      let tidslinjen: tidslinje | undefined = undefined;
+
+      if (this.commentSchema.value.likedislikeother=="like")
+        tidslinjen = new tidslinje(-1, this.commentSchema.value.user, new Date().valueOf(), new Date().valueOf(), this.selectStart, this.selectEnd, this.commentSchema.value.text, true, false, false, this.currentTitle.id)
+      else if (this.commentSchema.value.likedislikeother == "dislike")
+        tidslinjen = new tidslinje(-1, this.commentSchema.value.user, new Date().valueOf(), new Date().valueOf(), this.selectStart, this.selectEnd, this.commentSchema.value.text, false, true, false, this.currentTitle.id)
+      else
+        tidslinjen = new tidslinje(-1, this.commentSchema.value.user, new Date().valueOf(), new Date().valueOf(), this.selectStart, this.selectEnd, this.commentSchema.value.text, false, false, false, this.currentTitle.id)
+
+      this.timelineCommunicationService.sendTimePLine(tidslinjen).subscribe((res) => {
+        console.log("leaved add service")
+        if (tidslinjen)
+        this.timelineCommunicationService.getPChanges(tidslinjen.texttocommentid, "ADD", undefined, tidslinjen).subscribe((res2) => {
+          this.doChange(res2);
+          return;
+
+
+        });
+      });
     }
+  
   }
+  doChange(commandTimelines: tidslinjeCommandWrapper[]) {
+    commandTimelines.forEach((commandtidslinjen) => {
+
+      //NB!!!!! Fenwick is not in this component, must be moved.
+      //Going to send change list to proper component and move code.
+
+      console.log("Got command " + commandtidslinjen.command + " with timeline:")
+      if (String(commandtidslinjen.command) == "ADD") {
+
+        this.tidslinjerList.push(commandtidslinjen.tidslinje);
+        //this.fenwFeatureTree.addTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
+        console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
+        //Notify change to parrent, such that everyone now that we have a new tidslinje
+        this.tidslinjerListChangeFun();
+
+
+      }
+      else if (String(commandtidslinjen.command) == "CHANGE") {
+
+
+        let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
+        this.tidslinjerList.splice(index, 1, commandtidslinjen.tidslinje)
+
+        console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
+
+        //Notify change to parrent, such that everyone now that we have a new tidslinje
+        this.tidslinjerListChangeFun();
+      }
+      else if (String(commandtidslinjen.command) == "REMOVE") {
+        let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
+        this.tidslinjerList.splice(index, 1)
+        //this.fenwFeatureTree.removeTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
+        this.tidslinjerListChangeFun();
+      }
+
+    })
+
+  };
   //Get change in start and end of selection of text
   @Input('selectStart') selectStart: Number = new Number();
 

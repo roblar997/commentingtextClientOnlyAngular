@@ -31,9 +31,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
-      if (property == "tidslinjerList") {
-        console.log("change in list")
-      }
+ 
     }
   }
   //Get change in start and end of selection of text

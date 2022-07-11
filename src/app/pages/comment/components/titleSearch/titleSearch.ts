@@ -38,7 +38,8 @@ export class titleSearchComponent implements OnChanges, OnInit {
 
       }
       if (property == "tidslinjerList") {
-        console.log("change in list" + (changes[property].currentValue))
+        console.log("change in list")
+        this.selectStartChangeFun()
       }
       else if (property == "currentTitle") {
         console.log("Child 1 detecting change. Have a title list equal to" + (changes[property].currentValue))
