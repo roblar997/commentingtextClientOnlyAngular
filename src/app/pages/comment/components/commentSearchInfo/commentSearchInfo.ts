@@ -64,6 +64,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
         }
      
       }
+
       else if (property == "tidslinjerList")
         console.log("Child 2 detecting change. Value is now " + (JSON.stringify(changes[property].currentValue)))
     }

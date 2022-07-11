@@ -28,7 +28,7 @@
     <div class="container">
       <div>
         <titlesearch [selectEnd]="selectEnd"
-                     [selectStart]="selectStart"
+                     [(selectStart)]="selectStart"
                      [selectedText]="selectedText"
                      [commandTidslinjeWrapper]="commandTidslinjeWrapper"
                      [tidslinjerList]="tidslinjerList"
@@ -63,7 +63,7 @@
                             (filteredtimelinesChange)="filteredTimelineListChange2($event)"></commentsearchinfo>
 
         <commentschema [selectEnd]="selectEnd"
-                       [selectStart]="selectStart"
+                       [(selectStart)]="selectStart"
                        [selectedText]="selectedText"
                        [commandTidslinjeWrapper]="commandTidslinjeWrapper"
                        [tidslinjerList]="tidslinjerList"
@@ -82,7 +82,7 @@
       </div>
 
       <commentlist [selectEnd]="selectEnd"
-                   [selectStart]="selectStart"
+                  [(selectStart)]="selectStart"
                    [selectedText]="selectedText"
                    [commandTidslinjeWrapper]="commandTidslinjeWrapper"
                    [tidslinjerList]="tidslinjerList"

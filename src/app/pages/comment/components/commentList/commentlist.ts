@@ -31,7 +31,12 @@ export class commentlistComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
- 
+
+      if (property == "selectStart") {
+        console.log("This component detected change in start")
+
+      }
+      
     }
   }
   //Get change in start and end of selection of text
@@ -131,7 +136,6 @@ export class commentlistComponent implements OnChanges, OnInit {
         //this.fenwFeatureTree.addTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
         console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
         //Notify change to parrent, such that everyone now that we have a new tidslinje
-        this.tidslinjerListChangeFun();
 
 
       }
@@ -144,16 +148,24 @@ export class commentlistComponent implements OnChanges, OnInit {
         console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
 
         //Notify change to parrent, such that everyone now that we have a new tidslinje
-        this.tidslinjerListChangeFun();
+        //Provoke change in selection to update filtered comments  --- DIRY CODING ^^
+
       }
       else if (String(commandtidslinjen.command) == "REMOVE") {
         let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
         this.tidslinjerList.splice(index, 1)
+        
         //this.fenwFeatureTree.removeTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
-        this.tidslinjerListChangeFun();
+       
+
+        //Provoke change in selection to update filtered comments  --- DIRY CODING ^^
+
       }
 
     })
+    this.tidslinjerListChangeFun();
+
+
 
   };
   

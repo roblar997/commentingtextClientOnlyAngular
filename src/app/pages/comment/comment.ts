@@ -13,9 +13,9 @@ import { timelineCommunicationService } from "../../services/timelineCommunicati
   templateUrl: "comment.html"
 })
 export class commentComponent  implements OnInit {
-
+  cdf: ChangeDetectorRef;
   constructor(private newTextCommunicationService: newTextCommunicationService,
-    private timelineCommunicationService: timelineCommunicationService, cdf: ChangeDetectorRef) { }
+    private timelineCommunicationService: timelineCommunicationService, cdf: ChangeDetectorRef) { this.cdf = cdf; }
 
   ngOnInit(): void {
     this.newTextCommunicationService.getTitlesFromServer().subscribe((res) => {
@@ -23,6 +23,7 @@ export class commentComponent  implements OnInit {
       //Because components subscribes on this, it will trigger
       //onchange in child components
       this.titleList = res;
+
     });
    
   } 
@@ -41,28 +42,35 @@ export class commentComponent  implements OnInit {
   selectStartChange1(selectedStart : Number) {
     console.log("Parent received number from child 1: " + selectedStart.valueOf());
 
-    this.selectStart = selectedStart.valueOf() + 1;
+    this.selectStart = selectedStart.valueOf();
     console.log("Parent changing this number to " + this.selectStart.valueOf())
-
+    this.cdf.markForCheck();
      
   }
   selectStartChange2(selectedStart: Number) {
-    this.selectStart = selectedStart;
+    this.selectStart = selectedStart.valueOf();
     console.log("Parrent detected change in selected start point, from child 2, in text selection")
     console.log("Current start value is now: " + this.selectStart);
+    this.cdf.markForCheck();
   }
   selectStartChange3(selectedStart: Number) {
-
+    this.selectStart = selectedStart.valueOf();
+    console.log("Parrent detected change in selected start point, from child 2, in text selection")
+    console.log("Current start value is now: " + this.selectStart);
+    this.cdf.markForCheck();
   }
   selectStartChange4(selectedStart: Number) {
-
+    this.selectStart = selectedStart.valueOf();
+    console.log("Parrent detected change in selected start point, from child 2, in text selection")
+    console.log("Current start value is now: " + this.selectStart);
+    this.cdf.markForCheck();
   }
 
   selectEndChange1(selectedEnd : Number) {
 
   }
   selectEndChange2(selectedEnd: Number) {
-    this.selectEnd = selectedEnd;
+    this.selectEnd = selectedEnd.valueOf();
     console.log("Parrent detected change in selected end point, from child 2, in text selection")
     console.log("Current end value is now: " + this.selectEnd);
   }
@@ -116,7 +124,9 @@ export class commentComponent  implements OnInit {
   tidslinjerListChange4(tidslinjerList: Array<tidslinje>) {
     console.log("Parrent detected change in tidslinjelist to " + JSON.stringify(tidslinjerList))
 
-    this.tidslinjerList = tidslinjerList;
+    //Force detection by giving copy (change in refrence)
+    this.tidslinjerList = JSON.parse(JSON.stringify(tidslinjerList));
+  
 
 
   }
