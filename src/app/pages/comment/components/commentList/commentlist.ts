@@ -86,6 +86,7 @@ export class commentlistComponent implements OnChanges, OnInit {
       if (retur == "ok") {
         console.log("Modal is closed. List component received form data " + JSON.stringify(modalRef.componentInstance.tidslinjechange));
         this.changeTimeline(id, modalRef.componentInstance.tidslinjechange);
+
       }
        
 
@@ -107,7 +108,26 @@ export class commentlistComponent implements OnChanges, OnInit {
     else
       tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, false, false, tidslinjen.isdeleted, tidslinjen.texttocommentid);
 
-    this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => { console.log("leaved change service") });
+    this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => {
+      console.log("leaved change service")
+      this.timelineCommunicationService.getPChanges(tidslinjen2.texttocommentid).subscribe((res2) => {
+        res2.forEach((commandtidslinjen) => {
+          console.log("Got command " + commandtidslinjen.command + " with timeline:")
+          if (String(commandtidslinjen.command) == "ADD") {
+            console.log(JSON.stringify(commandtidslinjen.tidslinje))
+          }
+          else if (String(commandtidslinjen.command) == "CHANGE") {
+
+          }
+          else if (String(commandtidslinjen.command) == "REMOVE") {
+
+          }
+
+        })
+         
+      })
+      
+    });
   }
 
   removeById(id: Number) {

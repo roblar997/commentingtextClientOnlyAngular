@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from "rxjs";
 import { tidslinje } from "../models/tidslinje";
 import { title } from "../models/title";
+import { tidslinjeCommandWrapper } from "../models/tidslinjeCommandWrapper";
 
 @Injectable({ providedIn: 'root' })
 export class timelineCommunicationService {
@@ -44,10 +45,12 @@ export class timelineCommunicationService {
     //this.http.post(this.baseURL, data, { 'headers': headers });
     return of("OK");
   }
-  getPChanges(texttocommentid: Number): Observable<any> {
+  getPChanges(texttocommentid: Number): Observable<tidslinjeCommandWrapper[]> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
     const data = JSON.stringify({ "remoteMethod": "getChanges", "texttocommentid": texttocommentid, "timestamp": this.timestamp });
-    return this.http.post(this.baseURL, data, { 'headers': headers });
+    return of([{ "command": "ADD", "tidslinje": { "id": 166, "user": "RR", "timestampCreated": 1657545938272, "timestampChanged": 1657545938272, "start": 1570, "end": 1692, "text": "RRR", "like": true, "dislike": false, "isdeleted": false, "texttocommentid": 1 } }]);
+
+    //return this.http.post(this.baseURL, data, { 'headers': headers });
   
   }
 
