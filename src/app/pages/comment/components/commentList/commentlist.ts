@@ -31,7 +31,9 @@ export class commentlistComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
-
+      if (property == "tidslinjerList") {
+        console.log("change in list")
+      }
     }
   }
   //Get change in start and end of selection of text
@@ -99,10 +101,10 @@ export class commentlistComponent implements OnChanges, OnInit {
   changeTimeline(id: Number, formdata: tidslinjeChangeForm) {
 
     let tidslinjen: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
-    let tidslinjen2: tidslinje =  new tidslinje(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
+    let tidslinjen2: tidslinje = new tidslinje(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
 
     if (formdata.likedislikeother == "like")
-       tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, true,false, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+      tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, true, false, tidslinjen.isdeleted, tidslinjen.texttocommentid);
     else if (formdata.likedislikeother == "dislike")
       tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, false, true, tidslinjen.isdeleted, tidslinjen.texttocommentid);
     else
@@ -111,25 +113,52 @@ export class commentlistComponent implements OnChanges, OnInit {
     this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => {
       console.log("leaved change service")
       this.timelineCommunicationService.getPChanges(tidslinjen2.texttocommentid).subscribe((res2) => {
-        res2.forEach((commandtidslinjen) => {
-          console.log("Got command " + commandtidslinjen.command + " with timeline:")
-          if (String(commandtidslinjen.command) == "ADD") {
-            console.log(JSON.stringify(commandtidslinjen.tidslinje))
-          }
-          else if (String(commandtidslinjen.command) == "CHANGE") {
+        this.doChange(res2);
+        return;
 
-          }
-          else if (String(commandtidslinjen.command) == "REMOVE") {
 
-          }
+      });
+    })}
 
-        })
-         
-      })
-      
-    });
-  }
+  doChange(commandTimelines : tidslinjeCommandWrapper[]) {
+    commandTimelines.forEach((commandtidslinjen) => {
 
+      //NB!!!!! Fenwick is not in this component, must be moved.
+      //Going to send change list to proper component and move code.
+
+      console.log("Got command " + commandtidslinjen.command + " with timeline:")
+      if (String(commandtidslinjen.command) == "ADD") {
+
+        this.tidslinjerList.push(commandtidslinjen.tidslinje);
+        //this.fenwFeatureTree.addTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
+        console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
+        //Notify change to parrent, such that everyone now that we have a new tidslinje
+        this.tidslinjerListChangeFun();
+
+
+      }
+      else if (String(commandtidslinjen.command) == "CHANGE") {
+
+
+        let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
+        this.tidslinjerList.splice(index, 1, commandtidslinjen.tidslinje)
+
+        console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
+
+        //Notify change to parrent, such that everyone now that we have a new tidslinje
+        this.tidslinjerListChangeFun();
+      }
+      else if (String(commandtidslinjen.command) == "REMOVE") {
+        let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
+        this.tidslinjerList.splice(index, 1)
+        //this.fenwFeatureTree.removeTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
+        this.tidslinjerListChangeFun();
+      }
+
+    })
+
+  };
+  
   removeById(id: Number) {
     this.timelineCommunicationService.removePTimeLineById(id).subscribe((res) => { console.log("leaved remove service") });
  

@@ -48,7 +48,7 @@ export class timelineCommunicationService {
   getPChanges(texttocommentid: Number): Observable<tidslinjeCommandWrapper[]> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
     const data = JSON.stringify({ "remoteMethod": "getChanges", "texttocommentid": texttocommentid, "timestamp": this.timestamp });
-    return of([{ "command": "ADD", "tidslinje": { "id": 166, "user": "RR", "timestampCreated": 1657545938272, "timestampChanged": 1657545938272, "start": 1570, "end": 1692, "text": "RRR", "like": true, "dislike": false, "isdeleted": false, "texttocommentid": 1 } }]);
+    return of([{ "command": "ADD", "tidslinje": { "id": 166, "user": "RR", "timestampCreated": 1657545938272, "timestampChanged": 1657545938272, "start": 0, "end": 10, "text": "RRR", "like": true, "dislike": false, "isdeleted": false, "texttocommentid": 1 } }]);
 
     //return this.http.post(this.baseURL, data, { 'headers': headers });
   

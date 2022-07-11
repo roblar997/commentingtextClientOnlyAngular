@@ -1,6 +1,6 @@
 
 import { emitDistinctChangesOnlyDefaultValue } from "@angular/compiler";
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { Observable } from "rxjs/internal/Observable";
 import { tidslinje } from "../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../models/tidslinjeCommandWrapper";
@@ -15,7 +15,7 @@ import { timelineCommunicationService } from "../../services/timelineCommunicati
 export class commentComponent  implements OnInit {
 
   constructor(private newTextCommunicationService: newTextCommunicationService,
-    private timelineCommunicationService: timelineCommunicationService) { }
+    private timelineCommunicationService: timelineCommunicationService, cdf: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.newTextCommunicationService.getTitlesFromServer().subscribe((res) => {
@@ -25,7 +25,7 @@ export class commentComponent  implements OnInit {
       this.titleList = res;
     });
    
-  }
+  } 
 
   selectStart: Number = new Number();
   selectEnd: Number = new Number();
@@ -113,7 +113,11 @@ export class commentComponent  implements OnInit {
   tidslinjerListChange3(tidslinjerList: Array<tidslinje>) {
 
   } 
-  tidslinjerListChange4(tidslinjerList :Array<tidslinje>) {
+  tidslinjerListChange4(tidslinjerList: Array<tidslinje>) {
+    console.log("Parrent detected change in tidslinjelist to " + JSON.stringify(tidslinjerList))
+
+    this.tidslinjerList = tidslinjerList;
+
 
   }
 
