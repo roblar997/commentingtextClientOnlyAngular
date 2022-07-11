@@ -100,16 +100,16 @@ export class commentComponent  implements OnInit {
   }
 
   commandTidslinjeWrapperChange1(commandTidslinjeWrapper: Array<tidslinjeCommandWrapper>) {
-
+    this.commandTidslinjeWrapper = commandTidslinjeWrapper;
   }
   commandTidslinjeWrapperChange2(commandTidslinjeWrapper: Array<tidslinjeCommandWrapper>) {
-
+    this.commandTidslinjeWrapper = commandTidslinjeWrapper;
   }
   commandTidslinjeWrapperChange3(commandTidslinjeWrapper: Array<tidslinjeCommandWrapper>) {
-
+    this.commandTidslinjeWrapper = commandTidslinjeWrapper;
   }
   commandTidslinjeWrapperChange4(commandTidslinjeWrapper : Array<tidslinjeCommandWrapper>) {
-
+    this.commandTidslinjeWrapper = commandTidslinjeWrapper;
   }
 
   tidslinjerListChange1(tidslinjerList: Array<tidslinje>) {

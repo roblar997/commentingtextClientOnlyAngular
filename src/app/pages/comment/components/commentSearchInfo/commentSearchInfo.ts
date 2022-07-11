@@ -64,9 +64,10 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
         }
 
       }
-      if (property == "tidslinjerList") {
 
-        console.log("Child 4 detecting change. Value is now " + (JSON.stringify(changes[property].currentValue)))
+      if (property == "commandTidslinjeWrapper") {
+        console.log("change in command line");
+        this.doChange();
         this.filteredtimelines = of(this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf()));
         this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
         this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
@@ -150,6 +151,52 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
     })
     
   }
+
+  doChange() {
+    this.commandTidslinjeWrapper.forEach((commandtidslinjen) => {
+
+      //NB!!!!! Fenwick is not in this component, must be moved.
+      //Going to send change list to proper component and move code.
+
+      console.log("Got command " + commandtidslinjen.command + " with timeline:")
+      if (String(commandtidslinjen.command) == "ADD") {
+
+        this.tidslinjerList.push(commandtidslinjen.tidslinje);
+        //this.fenwFeatureTree.addTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
+        console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
+        //Notify change to parrent, such that everyone now that we have a new tidslinje
+
+
+      }
+      else if (String(commandtidslinjen.command) == "CHANGE") {
+
+
+        let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
+        this.tidslinjerList.splice(index, 1, commandtidslinjen.tidslinje)
+
+        console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
+
+        //Notify change to parrent, such that everyone now that we have a new tidslinje
+        //Provoke change in selection to update filtered comments  --- DIRY CODING ^^
+
+      }
+      else if (String(commandtidslinjen.command) == "REMOVE") {
+        let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
+        this.tidslinjerList.splice(index, 1)
+
+        //this.fenwFeatureTree.removeTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
+
+
+        //Provoke change in selection to update filtered comments  --- DIRY CODING ^^
+
+      }
+
+    })
+    if (this.commandTidslinjeWrapper != [])
+      this.tidslinjerListChangeFun();
+
+
+  };
   percentChange() {
     console.log("Percent changed to:" + this.percent.nativeElement.value)
     this.filteredtimelines = of(this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value));

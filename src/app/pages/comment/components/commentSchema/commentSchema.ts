@@ -56,7 +56,8 @@ export class commentSchemaComponent implements OnChanges, OnInit {
         console.log("leaved add service")
         if (tidslinjen)
         this.timelineCommunicationService.getPChanges(tidslinjen.texttocommentid, "ADD", undefined, tidslinjen).subscribe((res2) => {
-          this.doChange(res2);
+          this.commandTidslinjeWrapper = res2;
+          this.commandTidslinjeWrapperFun();
           return;
 
 
@@ -65,51 +66,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
     }
   
   }
-  doChange(commandTimelines: tidslinjeCommandWrapper[]) {
-    commandTimelines.forEach((commandtidslinjen) => {
-
-      //NB!!!!! Fenwick is not in this component, must be moved.
-      //Going to send change list to proper component and move code.
-
-      console.log("Got command " + commandtidslinjen.command + " with timeline:")
-      if (String(commandtidslinjen.command) == "ADD") {
-
-        this.tidslinjerList.push(commandtidslinjen.tidslinje);
-        //this.fenwFeatureTree.addTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
-        console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
-        //Notify change to parrent, such that everyone now that we have a new tidslinje
-
-
-      }
-      else if (String(commandtidslinjen.command) == "CHANGE") {
-
-
-        let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
-        this.tidslinjerList.splice(index, 1, commandtidslinjen.tidslinje)
-
-        console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
-
-        //Notify change to parrent, such that everyone now that we have a new tidslinje
-        //Provoke change in selection to update filtered comments  --- DIRY CODING ^^
-
-      }
-      else if (String(commandtidslinjen.command) == "REMOVE") {
-        let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
-        this.tidslinjerList.splice(index, 1)
-
-        //this.fenwFeatureTree.removeTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
-
-
-        //Provoke change in selection to update filtered comments  --- DIRY CODING ^^
-
-      }
-
-    })
-    if (commandTimelines != [])
-       this.tidslinjerListChangeFun();
-
-
-  };
+ 
   //Get change in start and end of selection of text
   @Input('selectStart') selectStart: Number = new Number();
 
