@@ -109,12 +109,7 @@ export class commentlistComponent implements OnChanges, OnInit {
 
     this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => { console.log("leaved change service") });
   }
-  trackByIndex(index: number): number{
-    return index;
-  };
-  substring(inp: string, start: number, end: number): Observable<String>{
-    return of(inp.substring(start,end));
-  }
+
   removeById(id: Number) {
     this.timelineCommunicationService.removePTimeLineById(id).subscribe((res) => { console.log("leaved remove service") });
  
