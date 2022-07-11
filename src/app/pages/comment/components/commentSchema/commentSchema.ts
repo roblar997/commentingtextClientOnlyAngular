@@ -1,6 +1,7 @@
 
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Observable } from "rxjs";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
@@ -101,8 +102,8 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   }
 
   //Filtered timelines
-  @Input('filteredtimelines') filteredtimelines: Array<tidslinje> = new Array<tidslinje>();
-  @Output() filteredtimelinesChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
+  @Input('filteredtimelines') filteredtimelines: Observable<Array<tidslinje>> = new Observable<Array<tidslinje>>();
+  @Output() filteredtimelinesChange: EventEmitter<Observable<Array<tidslinje>>> = new EventEmitter<Observable<Array<tidslinje>>>();
 
   filteredTimelinesChangeFun() {
     this.filteredtimelinesChange.emit(this.filteredtimelines);

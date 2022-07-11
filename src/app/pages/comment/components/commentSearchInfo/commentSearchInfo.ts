@@ -1,5 +1,7 @@
 
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TrackByFunction, ViewChild } from "@angular/core";
+import { of } from "rxjs";
+import { Observable } from "rxjs/internal/Observable";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
@@ -9,7 +11,7 @@ import { FenwFeatureTree } from "../../../../structureClasses/FenwFeatureTree";
   selector: "commentsearchinfo",
   templateUrl: "commentSearchInfo.html"
 })
-export class commentSearchInfoComponent implements OnChanges, OnInit {
+export class commentSearchInfoComponent implements OnChanges, OnInit{
   ngOnInit(): void {
     //TESTING!!
     this.selectedText = "textPart 1 "
@@ -27,7 +29,9 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     if (timeline.like) return nmbLikes + 1;
     else return nmbLikes;
   }, 0.0)
-}
+  }
+
+
   countDisLikes(start: Number, end: Number, percent: Number) {
     let timeLinesFilteredTime = this.filterListByTime(start.valueOf(), end.valueOf(), percent.valueOf());
   return timeLinesFilteredTime.reduce((nmbDisLike, timeline) => {
@@ -51,7 +55,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
             }
           })
 
-          this.countingList = this.currentFenwick.getCountingList(0, this.currentTitle.text.length);
+          this.countingList = of(this.currentFenwick.getCountingList(0, this.currentTitle.text.length));
           console.log("Have following counting list: " + this.countingList);
         }
      
@@ -112,7 +116,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
     console.log("Following area is selected (start,end): (" + this.selectStart + "," + this.selectEnd + ")")
     console.log("Percent picked up is:" + this.percent.nativeElement.value)
 
-    this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf());
+    this.filteredtimelines = of(this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf()));
     this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
     this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
 
@@ -134,7 +138,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
   }
   percentChange() {
     console.log("Percent changed to:" + this.percent.nativeElement.value)
-    this.filteredtimelines = this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+    this.filteredtimelines = of(this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value));
     this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
     this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
     this.filteredTimelinesChangeFun();
@@ -161,7 +165,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
   @Output() currentTitleChange: EventEmitter<title> = new EventEmitter<title>();
 
   currentFenwick!: FenwFeatureTree;
-  countingList!: number[]
+  countingList!: Observable<number[]>
 
   titleChangeFun() {
 
@@ -169,8 +173,8 @@ export class commentSearchInfoComponent implements OnChanges, OnInit {
   }
 
   //Filtered timelines
-  @Input('filteredtimelines') filteredtimelines: Array<tidslinje> = new Array<tidslinje>();
-  @Output() filteredtimelinesChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
+  @Input('filteredtimelines') filteredtimelines: Observable<Array<tidslinje>> = new Observable<Array<tidslinje>>();
+  @Output() filteredtimelinesChange: EventEmitter<Observable<Array<tidslinje>>> = new EventEmitter<Observable<Array<tidslinje>>>();
 
   filteredTimelinesChangeFun() {
     this.filteredtimelinesChange.emit(this.filteredtimelines  );

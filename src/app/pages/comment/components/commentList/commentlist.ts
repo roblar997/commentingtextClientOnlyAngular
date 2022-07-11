@@ -1,5 +1,5 @@
 
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TrackByFunction } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { tidslinjeChangeForm } from "../../../../models/tidslinjeChangeForm";
 import { newTextCommunicationService } from "../../../../services/newTextCommunicationService";
 import { timelineCommunicationService } from "../../../../services/timelineCommunicationService";
+import { Observable } from "rxjs/internal/Observable";
 @Component({
   selector: "commentlist",
   templateUrl: "commentlist.html"
@@ -163,8 +164,8 @@ export class commentlistComponent implements OnChanges, OnInit {
   }
 
   //Filtered timelines
-  @Input('filteredtimelines') filteredtimelines: Array<tidslinje> = new Array<tidslinje>();
-  @Output() filteredtimelinesChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
+  @Input('filteredtimelines') filteredtimelines: Observable<Array<tidslinje>> = new Observable<Array<tidslinje>>();
+  @Output() filteredtimelinesChange: EventEmitter<Observable<Array<tidslinje>>> = new EventEmitter<Observable<Array<tidslinje>>>();
 
   filteredTimelinesChangeFun() {
     this.filteredtimelinesChange.emit(this.filteredtimelines);

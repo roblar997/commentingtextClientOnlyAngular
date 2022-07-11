@@ -6,6 +6,7 @@ import { title } from "../../../../models/title";
 import { AfterContentChecked, AfterViewChecked } from '@angular/core';
 import { newTextCommunicationService } from '../../../../services/newTextCommunicationService';
 import { timelineCommunicationService } from '../../../../services/timelineCommunicationService';
+import { Observable } from "rxjs";
 @Component({
   selector: "titlesearch",
   templateUrl: "titleSearch.html"
@@ -118,8 +119,9 @@ export class titleSearchComponent implements OnChanges, OnInit {
   }
 
   //Filtered timelines
-  @Input('filteredtimelines') filteredtimelines: Array<tidslinje> = new Array<tidslinje>();
-  @Output() filteredtimelinesChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
+  //Filtered timelines
+  @Input('filteredtimelines') filteredtimelines: Observable<Array<tidslinje>> = new Observable<Array<tidslinje>>();
+  @Output() filteredtimelinesChange: EventEmitter<Observable<Array<tidslinje>>> = new EventEmitter<Observable<Array<tidslinje>>>();
 
   filteredTimelinesChangeFun() {
     this.filteredtimelinesChange.emit(this.filteredtimelines);

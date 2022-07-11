@@ -1,6 +1,7 @@
 
 import { emitDistinctChangesOnlyDefaultValue } from "@angular/compiler";
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
+import { Observable } from "rxjs/internal/Observable";
 import { tidslinje } from "../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../models/tidslinjeCommandWrapper";
 import { title } from "../../models/title";
@@ -32,7 +33,7 @@ export class commentComponent  implements OnInit {
   commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array < tidslinjeCommandWrapper >()
 
   tidslinjerList: Array<tidslinje> = new Array<tidslinje>()
-  filteredtimelines: Array<tidslinje> = new Array<tidslinje>()
+  filteredtimelines: Observable<Array<tidslinje>> = new Observable<Array<tidslinje>>()
 
   titleList: Array<String> = new Array<String>()
   currentTitle: title = new title();
@@ -136,7 +137,7 @@ export class commentComponent  implements OnInit {
 
     this.timelineCommunicationService.getInitPState(this.currentTitle.id).subscribe((res) => {
       this.tidslinjerList = res;
-      console.log("Parrent got following beginning state (timelines " + JSON.stringify(this.tidslinjerList));
+    
     });
   }
   titleChange2(title: title) {
@@ -149,18 +150,18 @@ export class commentComponent  implements OnInit {
 
   }
 
-  filteredTimelineListChange1(tidslinjerList: Array<tidslinje>) {
+  filteredTimelineListChange1(tidslinjerList: Observable<Array<tidslinje>>) {
 
   }
-  filteredTimelineListChange2(tidslinjerList: Array<tidslinje>) {
+  filteredTimelineListChange2(tidslinjerList: Observable<Array<tidslinje>>) {
     console.log("Parrent detected, because of child 2, that we now have these filtered timelines:")
     console.log(JSON.stringify(tidslinjerList))
     this.filteredtimelines = tidslinjerList
   }
-  filteredTimelineListChange3(tidslinjerList: Array<tidslinje>) {
+  filteredTimelineListChange3(tidslinjerList: Observable<Array<tidslinje>>) {
 
   }
-  filteredTimelineListChange4(tidslinjerList: Array<tidslinje>) {
+  filteredTimelineListChange4(tidslinjerList: Observable<Array<tidslinje>>) {
 
   }
 }
