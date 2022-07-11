@@ -16,7 +16,8 @@ export class newTextCommunicationService {
   addPNewText(title: String, text: String): Observable<any> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
     const data = JSON.stringify({ "remoteMethod": "addText", "title": title, "text": text });
-    return this.http.post(this.baseURL, data, { 'headers': headers });
+    //return this.http.post(this.baseURL, data, { 'headers': headers });
+    return of("OK");
   }
 
   getText(title: String): Observable<title> {

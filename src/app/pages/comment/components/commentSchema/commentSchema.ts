@@ -54,11 +54,11 @@ export class commentSchemaComponent implements OnChanges, OnInit {
 
       this.timelineCommunicationService.sendTimePLine(tidslinjen).subscribe((res) => {
         console.log("leaved add service")
-        if (tidslinjen)
-        this.timelineCommunicationService.getPChanges(tidslinjen.texttocommentid, "ADD", undefined, tidslinjen).subscribe((res2) => {
-          this.commandTidslinjeWrapper = res2;
-          this.commandTidslinjeWrapperFun();
-          return;
+        if (tidslinjen != undefined)
+             this.timelineCommunicationService.getPChanges(tidslinjen.texttocommentid, "ADD", undefined, tidslinjen).subscribe((res2) => {
+        this.commandTidslinjeWrapper = res2;
+        this.commandTidslinjeWrapperFun();
+        return;
 
 
         });
