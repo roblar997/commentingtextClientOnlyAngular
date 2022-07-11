@@ -19,22 +19,25 @@ export class FenwFeatureTree {
 
 
 
-  query(timeSlot : number) {
+  async query(timeSlot : number) {
 
-    let returnVal : number = 0;
+  
+    return new Promise<number>(resolve => {
+      let returnVal: number = 0;
 
-    while (timeSlot > 0) {
-      returnVal += this.tree[timeSlot]
-      timeSlot -= timeSlot & (-timeSlot)
-    }
+      while (timeSlot > 0) {
+        returnVal += this.tree[timeSlot]
+        timeSlot -= timeSlot & (-timeSlot)
+      }
+      resolve(returnVal)
+    });
 
-    return returnVal
 
   }
 
 
-  rangeQuery(l: number, r : number) {
-    let ret : number = this.query(l - 1) - this.query(r)
+  async rangeQuery(l: number, r : number) {
+    let ret : number = await this.query(l - 1) - await this.query(r)
     return ret
   }
 
@@ -64,12 +67,13 @@ export class FenwFeatureTree {
     this.update(end + 1, 1);
   }
 
-  getCountingList(start : number, stop : number) {
-    let res : number[] = []
+  async getCountingList(start: number, stop: number) {
+    let res: Array<Promise<number>> = new Array<Promise<number>>();
+
     for (let i = start; i <= stop; i++) {
       res.push(this.query(i))
     }
-    return res;
+     return await Promise.all(res);
   }
 
 

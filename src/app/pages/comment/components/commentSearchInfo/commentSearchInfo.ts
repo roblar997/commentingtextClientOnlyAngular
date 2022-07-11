@@ -43,7 +43,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
     else return nmbDisLike;
   }, 0.0)
 }
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
       if (property == "selectedText")
@@ -59,7 +59,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
             }
           })
 
-          this.countingList = of(this.currentFenwick.getCountingList(0, this.currentTitle.text.length));
+          this.countingList = of(await this.currentFenwick.getCountingList(0, this.currentTitle.text.length));
           console.log("Have following counting list: " + this.countingList);
         }
      

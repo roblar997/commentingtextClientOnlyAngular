@@ -11,6 +11,7 @@
 
     <p class="h3">Comments       <i class="fa fa-refresh m-1" id="refreshComments"></i></p>
     <p class="h3" style="margin-top: 10px">Is a comment of following </p>
+
     <div id="commentHighlight" *ngIf="ishighlighting" style="overflow-y: auto;width:320px; height:220px; margin-top: 10px" readonly>
       <span style="background-color:white ; color:black" *ngFor="let val of substring(currentTitle.text.valueOf(),0,highlightetcommentstart.valueOf()) | async; trackBy:trackByIndex ">{{val}}</span>
       <span style="background-color: lightskyblue" *ngFor="let val of substring(currentTitle.text.valueOf(),highlightetcommentstart.valueOf(),highlightetcommentend.valueOf())| async; trackBy:trackByIndex ">{{val}}</span>

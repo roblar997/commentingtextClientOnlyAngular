@@ -4,6 +4,7 @@ import { tidslinje } from "../../../../models/tidslinje";
 import { tidslinjeCommandWrapper } from "../../../../models/tidslinjeCommandWrapper";
 import { title } from "../../../../models/title";
 import { AfterContentChecked, AfterViewChecked } from '@angular/core';
+
 import { newTextCommunicationService } from '../../../../services/newTextCommunicationService';
 import { timelineCommunicationService } from '../../../../services/timelineCommunicationService';
 import { Observable } from "rxjs";
