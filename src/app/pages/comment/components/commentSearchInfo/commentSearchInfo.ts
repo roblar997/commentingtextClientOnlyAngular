@@ -72,6 +72,9 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
         this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
         this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
 
+        //Recalculate counting list
+        this.countingList = of(await this.currentFenwick.getCountingList(0, this.currentTitle.text.length));
+
         //Send notification to parrent, such that one can broadcast this info to other childs
         this.filteredTimelinesChangeFun();
       }
@@ -155,14 +158,13 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   doChange() {
     this.commandTidslinjeWrapper.forEach((commandtidslinjen) => {
 
-      //NB!!!!! Fenwick is not in this component, must be moved.
-      //Going to send change list to proper component and move code.
 
       console.log("Got command " + commandtidslinjen.command + " with timeline:")
       if (String(commandtidslinjen.command) == "ADD") {
 
         this.tidslinjerList.push(commandtidslinjen.tidslinje);
-        //this.fenwFeatureTree.addTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
+        if (commandtidslinjen.tidslinje && commandtidslinjen.tidslinje.start && commandtidslinjen.tidslinje.end)
+          this.currentFenwick.addTimeline(commandtidslinjen.tidslinje.start.valueOf(), commandtidslinjen.tidslinje.end.valueOf())
         console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
         //Notify change to parrent, such that everyone now that we have a new tidslinje
 
@@ -176,18 +178,15 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
 
         console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));
 
-        //Notify change to parrent, such that everyone now that we have a new tidslinje
-        //Provoke change in selection to update filtered comments  --- DIRY CODING ^^
-
       }
       else if (String(commandtidslinjen.command) == "REMOVE") {
         let index = this.tidslinjerList.findIndex((x) => { return x.id == commandtidslinjen.tidslinje.id })
         this.tidslinjerList.splice(index, 1)
 
-        //this.fenwFeatureTree.removeTimeline(commandtidslinjen.tidslinje.start, commandtidslinjen.tidslinje.end)
+        if (commandtidslinjen.tidslinje && commandtidslinjen.tidslinje.start && commandtidslinjen.tidslinje.end)
+          this.currentFenwick.removeTimeline(commandtidslinjen.tidslinje.start.valueOf(), commandtidslinjen.tidslinje.end.valueOf())
 
 
-        //Provoke change in selection to update filtered comments  --- DIRY CODING ^^
 
       }
 
