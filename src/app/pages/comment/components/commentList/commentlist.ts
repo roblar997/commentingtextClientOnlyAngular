@@ -104,11 +104,11 @@ export class commentlistComponent implements OnChanges, OnInit {
     let tidslinjen2: tidslinje = new tidslinje(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
 
     if (formdata.likedislikeother == "like")
-      tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, true, false, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+      tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, new Date().valueOf(), tidslinjen.start, tidslinjen.end, formdata.text, true, false, tidslinjen.isdeleted, tidslinjen.texttocommentid);
     else if (formdata.likedislikeother == "dislike")
-      tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, false, true, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+      tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, new Date().valueOf(), tidslinjen.start, tidslinjen.end, formdata.text, false, true, tidslinjen.isdeleted, tidslinjen.texttocommentid);
     else
-      tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, tidslinjen.timestampChanged, tidslinjen.start, tidslinjen.end, formdata.text, false, false, tidslinjen.isdeleted, tidslinjen.texttocommentid);
+      tidslinjen2 = new tidslinje(tidslinjen.id, formdata.user, tidslinjen.timestampCreated, new Date().valueOf(), tidslinjen.start, tidslinjen.end, formdata.text, false, false, tidslinjen.isdeleted, tidslinjen.texttocommentid);
 
     this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => {
       console.log("leaved change service")
