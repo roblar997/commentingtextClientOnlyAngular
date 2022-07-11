@@ -105,7 +105,8 @@ export class commentSchemaComponent implements OnChanges, OnInit {
       }
 
     })
-    this.tidslinjerListChangeFun();
+    if (commandTimelines != [])
+       this.tidslinjerListChangeFun();
 
 
   };
