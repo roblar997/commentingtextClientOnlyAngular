@@ -12,9 +12,9 @@
     <p class="h3">Comments       <i class="fa fa-refresh m-1" id="refreshComments"></i></p>
     <p class="h3" style="margin-top: 10px">Is a comment of following </p>
     <div id="commentHighlight" *ngIf="ishighlighting" style="overflow-y: auto;width:320px; height:220px; margin-top: 10px" readonly>
-      <span style="background-color:white ; color:black">{{currentTitle.text.substring(0,highlightetcommentstart.valueOf())}}</span>
-      <span style="background-color: lightskyblue; color: black">{{currentTitle.text.substring(highlightetcommentstart.valueOf(),highlightetcommentend.valueOf())}}</span>
-      <span style="background-color:white ; color:black">{{currentTitle.text.substring(highlightetcommentend.valueOf(),currentTitle.text.length)}}</span>
+      <span style="background-color:white ; color:black" *ngFor="let val of substring(currentTitle.text.valueOf(),0,highlightetcommentstart.valueOf()) | async; trackBy:trackByIndex ">{{val}}</span>
+      <span style="background-color: lightskyblue" *ngFor="let val of substring(currentTitle.text.valueOf(),highlightetcommentstart.valueOf(),highlightetcommentend.valueOf())| async; trackBy:trackByIndex ">{{val}}</span>
+      <span style="background-color: white; color: black" *ngFor="let val of substring(currentTitle.text.valueOf(),highlightetcommentend.valueOf(),currentTitle.text.length) | async; trackBy:trackByIndex ">{{val}}</span>
     </div>
     
     <div id="comments" class="container"></div>
