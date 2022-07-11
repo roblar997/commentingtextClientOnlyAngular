@@ -162,7 +162,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
       console.log("Got command " + commandtidslinjen.command + " with timeline:")
       if (String(commandtidslinjen.command) == "ADD") {
 
-        this.tidslinjerList.push(commandtidslinjen.tidslinje);
+        this.tidslinjerList.push(JSON.parse(JSON.stringify(commandtidslinjen.tidslinje)));
         if (commandtidslinjen.tidslinje && commandtidslinjen.tidslinje.start && commandtidslinjen.tidslinje.end)
           this.currentFenwick.addTimeline(commandtidslinjen.tidslinje.start.valueOf(), commandtidslinjen.tidslinje.end.valueOf())
         console.log("State of tidslinje array: " + JSON.stringify(this.tidslinjerList));

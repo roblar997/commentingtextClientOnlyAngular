@@ -41,7 +41,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   }
 
   addNewComment() {
-    if (this.commentSchema.valid) {
+    if (this.commentSchema.valid && this.selectStart != undefined && this.selectEnd != undefined) {
       console.log("Adding new comment")
       let tidslinjen: tidslinje | undefined = undefined;
 

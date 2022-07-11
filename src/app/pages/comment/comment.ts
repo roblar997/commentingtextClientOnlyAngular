@@ -44,30 +44,30 @@ export class commentComponent  implements OnInit {
 
     this.selectStart = selectedStart.valueOf();
     console.log("Parent changing this number to " + this.selectStart.valueOf())
-    this.cdf.markForCheck();
+  
      
   }
   selectStartChange2(selectedStart: Number) {
     this.selectStart = selectedStart.valueOf();
     console.log("Parrent detected change in selected start point, from child 2, in text selection")
     console.log("Current start value is now: " + this.selectStart);
-    this.cdf.markForCheck();
+
   }
   selectStartChange3(selectedStart: Number) {
     this.selectStart = selectedStart.valueOf();
     console.log("Parrent detected change in selected start point, from child 2, in text selection")
     console.log("Current start value is now: " + this.selectStart);
-    this.cdf.markForCheck();
+
   }
   selectStartChange4(selectedStart: Number) {
     this.selectStart = selectedStart.valueOf();
     console.log("Parrent detected change in selected start point, from child 2, in text selection")
     console.log("Current start value is now: " + this.selectStart);
-    this.cdf.markForCheck();
+
   }
 
   selectEndChange1(selectedEnd : Number) {
-
+    this.selectEnd = selectedEnd.valueOf();
   }
   selectEndChange2(selectedEnd: Number) {
     this.selectEnd = selectedEnd.valueOf();
