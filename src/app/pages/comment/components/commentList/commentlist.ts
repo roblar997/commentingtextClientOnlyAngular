@@ -160,7 +160,16 @@ export class commentlistComponent implements OnChanges, OnInit {
   };
   
   removeById(id: Number) {
-    this.timelineCommunicationService.removePTimeLineById(id).subscribe((res) => { console.log("leaved remove service") });
+    this.timelineCommunicationService.removePTimeLineById(id).subscribe((res) => {
+      console.log("leaved remove service")
+      this.timelineCommunicationService.getPChanges(id).subscribe((res2) => {
+        this.doChange(res2);
+        return;
+
+
+      });
+    });
+
  
   }
   @Input('selectEnd') selectEnd: Number = new Number();
