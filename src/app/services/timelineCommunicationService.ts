@@ -45,13 +45,21 @@ export class timelineCommunicationService {
     //this.http.post(this.baseURL, data, { 'headers': headers });
     return of("OK");
   }
-  getPChanges(texttocommentid: Number): Observable<tidslinjeCommandWrapper[]> {
+  getPChanges(texttocommentid: Number, testCommand: string, testID: number | undefined, testTidslinje: tidslinje | undefined): Observable<tidslinjeCommandWrapper[]> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
     const data = JSON.stringify({ "remoteMethod": "getChanges", "texttocommentid": texttocommentid, "timestamp": this.timestamp });
-    return of([{ "command": "ADD", "tidslinje": { "id": 166, "user": "RR", "timestampCreated": 1657545938272, "timestampChanged": 1657545938272, "start": 0, "end": 10, "text": "RRR", "like": true, "dislike": false, "isdeleted": false, "texttocommentid": 1 } }]);
+    if(testID && testCommand=="REMOVE")
+      return of([{ "command": "REMOVE", "tidslinje": { "id": testID, "user": "RR", "timestampCreated": 1657545938272, "timestampChanged": 1657545938272, "start": 0, "end": 10, "text": "RRR", "like": true, "dislike": false, "isdeleted": false, "texttocommentid": 1 } }
+      ]);
+    if (testTidslinje && testCommand == "ADD") {
+      return of([{ "command": "ADD", "tidslinje": testTidslinje }])
+    }
+    else if (testTidslinje && testCommand == "CHANGE") {
+      return of([{ "command": "CHANGE", "tidslinje": testTidslinje }])
+    }
 
     //return this.http.post(this.baseURL, data, { 'headers': headers });
-  
+    return of([]);
   }
 
 }

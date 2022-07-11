@@ -112,7 +112,7 @@ export class commentlistComponent implements OnChanges, OnInit {
 
     this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => {
       console.log("leaved change service")
-      this.timelineCommunicationService.getPChanges(tidslinjen2.texttocommentid).subscribe((res2) => {
+      this.timelineCommunicationService.getPChanges(tidslinjen2.texttocommentid,"CHANGE", undefined, tidslinjen2).subscribe((res2) => {
         this.doChange(res2);
         return;
 
@@ -162,7 +162,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   removeById(id: Number) {
     this.timelineCommunicationService.removePTimeLineById(id).subscribe((res) => {
       console.log("leaved remove service")
-      this.timelineCommunicationService.getPChanges(id).subscribe((res2) => {
+      this.timelineCommunicationService.getPChanges(id, "REMOVE", id.valueOf(), undefined).subscribe((res2) => {
         this.doChange(res2);
         return;
 
