@@ -7,10 +7,10 @@ export class tidslinje {
     if (timestampChanged) this.timestampChanged = timestampChanged;
     if (start) this.start = start;
     if (end) this.end = end;
-    if (text)  this.text = text;
-    if (like) this.like = like;
-    if (dislike) this.dislike = dislike;
-    if (isdeleted) this.isdeleted = isdeleted;
+    if (text) this.text = text;
+    if (like != undefined) this.like = like;
+    if (dislike != undefined)  this.dislike = dislike;
+    if (isdeleted != undefined) this.isdeleted = isdeleted;
     if (texttocommentid) this.texttocommentid = texttocommentid;
   }
   id!: Number;
