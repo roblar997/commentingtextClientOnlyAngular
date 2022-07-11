@@ -26,9 +26,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   trackByIndex(index: number): number {
     return index;
   };
-  split(text: String): Observable<Array<string>> {
-    return of(text.split(''))
-  }
+
   countLikes(start: Number, end: Number, percent: Number) {
     let timeLinesFilteredTime = this.filterListByTime(start.valueOf(), end.valueOf(), percent.valueOf());
   return timeLinesFilteredTime.reduce((nmbLikes, timeline) => {
