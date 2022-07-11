@@ -40,7 +40,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
     }
   }
 
-  addNewComment() {
+  async addNewComment() {
     if (this.commentSchema.valid && this.selectStart != undefined && this.selectEnd != undefined) {
       console.log("Adding new comment")
       let tidslinjen: tidslinje | undefined = undefined;
@@ -72,7 +72,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
 
   @Output() selectStartChange: EventEmitter<Number> = new EventEmitter<Number>();
 
-  selectStartChangeFun() {
+  async selectStartChangeFun() {
 
     this.selectStartChange.emit(this.selectStart);
   }
@@ -81,7 +81,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   @Input('selectEnd') selectEnd: Number = new Number();
 
   @Output() selectEndChange: EventEmitter<Number> = new EventEmitter<Number>();
-  selectEndChangeFun() {
+  async selectEndChangeFun() {
     this.selectEndChange.emit(this.selectEnd);
   }
 
@@ -90,7 +90,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   @Input('selectedText') selectedText: String = new String();
   @Output() selectedTextChange: EventEmitter<String> = new EventEmitter<String>();
 
-  selectedTextChangeFun() {
+  async selectedTextChangeFun() {
     this.selectedTextChange.emit(this.selectedText.valueOf());
   }
 
@@ -99,7 +99,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   @Input('commandTidslinjeWrapper') commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array<tidslinjeCommandWrapper>();
   @Output() commandTidslinjeWrapperChange: EventEmitter<Array<tidslinjeCommandWrapper>> = new EventEmitter<Array<tidslinjeCommandWrapper>>();
 
-  commandTidslinjeWrapperFun() {
+  async commandTidslinjeWrapperFun() {
     this.commandTidslinjeWrapperChange.emit(this.commandTidslinjeWrapper);
   }
 
@@ -108,7 +108,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   @Input('tidslinjerList') tidslinjerList: Array<tidslinje> = new Array<tidslinje>();
   @Output() tidslinjerListChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
 
-  tidslinjerListChangeFun() {
+  async tidslinjerListChangeFun() {
     this.tidslinjerListChange.emit(this.tidslinjerList);
   }
 
@@ -116,14 +116,14 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   @Input('titleList') titleList: Array<String> = new Array<String>();
   @Output() titleListChange: EventEmitter<Array<String>> = new EventEmitter<Array<String>>();
 
-  titleListChangeFun() {
+  async titleListChangeFun() {
     this.titleListChange.emit(this.titleList);
   }
   //Current title
   @Input('currentTitle') currentTitle: title = new title();
   @Output() currentTitleChange: EventEmitter<title> = new EventEmitter<title>();
 
-  titleChangeFun() {
+  async titleChangeFun() {
     this.currentTitleChange.emit(this.currentTitle);
   }
 
@@ -131,7 +131,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   @Input('filteredtimelines') filteredtimelines: Observable<Array<tidslinje>> = new Observable<Array<tidslinje>>();
   @Output() filteredtimelinesChange: EventEmitter<Observable<Array<tidslinje>>> = new EventEmitter<Observable<Array<tidslinje>>>();
 
-  filteredTimelinesChangeFun() {
+  async filteredTimelinesChangeFun() {
     this.filteredtimelinesChange.emit(this.filteredtimelines);
   }
 }

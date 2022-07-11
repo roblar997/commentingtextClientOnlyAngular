@@ -28,7 +28,7 @@ export class commentlistComponent implements OnChanges, OnInit {
     Promise.resolve().then(() => this.cdref.detectChanges());
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
 
@@ -40,7 +40,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   @Input('selectStart') selectStart: Number = new Number();
   @Output() selectStartChange: EventEmitter<Number> = new EventEmitter<Number>();
 
-  selectStartChangeFun() {
+  async selectStartChangeFun() {
     
     this.selectStartChange.emit(this.selectStart);
   }
@@ -49,7 +49,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   highlightetcommentstart!: Number;
   highlightetcommentend!: Number;
 
-  highlightText(id: Number) {
+  async highlightText(id: Number) {
     console.log("Started function to highlight by id " + id.valueOf())
     let tidslinje: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
 
@@ -63,7 +63,7 @@ export class commentlistComponent implements OnChanges, OnInit {
     else
         this.ishighlighting = false;
   }
-  getChangbox(id: Number) {
+  async getChangbox(id: Number) {
     console.log("Started function to change by id " + id.valueOf())
 
     let tidslinje: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
@@ -98,7 +98,7 @@ export class commentlistComponent implements OnChanges, OnInit {
 
 
   }
-  changeTimeline(id: Number, formdata: tidslinjeChangeForm) {
+  async changeTimeline(id: Number, formdata: tidslinjeChangeForm) {
 
     let tidslinjen: tidslinje = this.tidslinjerList.filter((x) => x.id == id)[0];
     let tidslinjen2: tidslinje = new tidslinje(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
@@ -124,7 +124,7 @@ export class commentlistComponent implements OnChanges, OnInit {
 
   
   
-  removeById(id: Number) {
+  async removeById(id: Number) {
     this.timelineCommunicationService.removePTimeLineById(id).subscribe((res) => {
       console.log("leaved remove service")
       this.timelineCommunicationService.getPChanges(id, "REMOVE", id.valueOf(), undefined).subscribe((res2) => {
@@ -141,7 +141,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   @Input('selectEnd') selectEnd: Number = new Number();
 
   @Output() selectEndChange: EventEmitter<Number> = new EventEmitter<Number>();
-  selectEndChangeFun() {
+  async selectEndChangeFun() {
     this.selectEndChange.emit(this.selectEnd);
   }
 
@@ -150,7 +150,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   @Input('selectedText') selectedText: String = new String();
   @Output() selectedTextChange: EventEmitter<String> = new EventEmitter<String>();
 
-  selectedTextChangeFun() {
+  async selectedTextChangeFun() {
     this.selectedTextChange.emit(this.selectedText);
   }
 
@@ -159,7 +159,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   @Input('commandTidslinjeWrapper') commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array<tidslinjeCommandWrapper>();
   @Output() commandTidslinjeWrapperChange: EventEmitter<Array<tidslinjeCommandWrapper>> = new EventEmitter<Array<tidslinjeCommandWrapper>>();
 
-  commandTidslinjeWrapperFun() {
+  async commandTidslinjeWrapperFun() {
     this.commandTidslinjeWrapperChange.emit(this.commandTidslinjeWrapper);
   }
 
@@ -168,7 +168,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   @Input('tidslinjerList') tidslinjerList: Array<tidslinje> = new Array<tidslinje>();
   @Output() tidslinjerListChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
 
-  tidslinjerListChangeFun() {
+  async tidslinjerListChangeFun() {
     this.tidslinjerListChange.emit(this.tidslinjerList);
   }
  
@@ -176,7 +176,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   @Input('titleList') titleList: Array<String> = new Array<String>();
   @Output() titleListChange: EventEmitter<Array<String>> = new EventEmitter<Array<String>>();
 
-  titleListChangeFun() {
+  async titleListChangeFun() {
     this.titleListChange.emit(this.titleList);
   }
 
@@ -184,7 +184,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   @Input('currentTitle') currentTitle: title = new title();
   @Output() currentTitleChange: EventEmitter<title> = new EventEmitter<title>();
 
-  titleChangeFun() {
+  async titleChangeFun() {
     this.currentTitleChange.emit(this.currentTitle);
   }
 
@@ -192,7 +192,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   @Input('filteredtimelines') filteredtimelines: Observable<Array<tidslinje>> = new Observable<Array<tidslinje>>();
   @Output() filteredtimelinesChange: EventEmitter<Observable<Array<tidslinje>>> = new EventEmitter<Observable<Array<tidslinje>>>();
 
-  filteredTimelinesChangeFun() {
+  async filteredTimelinesChangeFun() {
     this.filteredtimelinesChange.emit(this.filteredtimelines);
   }
 }

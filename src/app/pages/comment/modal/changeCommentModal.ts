@@ -22,7 +22,7 @@ export class changeCommentModal {
   @Input() public tidslinjechange: tidslinjeChangeForm = new tidslinjeChangeForm(undefined, undefined, undefined);
   @Output() componentResult: EventEmitter<tidslinjeChangeForm> = new EventEmitter();
 
-  resultChange() {
+  async resultChange() {
     if (this.changeSchema.valid) {
       console.log("Modal is detecting form is changed, and validated, to" + JSON.stringify(this.tidslinjechange));
       this.componentResult.emit(this.tidslinjechange);

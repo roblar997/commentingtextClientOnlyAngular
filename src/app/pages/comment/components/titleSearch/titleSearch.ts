@@ -17,17 +17,17 @@ export class titleSearchComponent implements OnChanges, OnInit {
     private cdref: ChangeDetectorRef,private newTextCommunicationService: newTextCommunicationService,
     private timelineCommunicationService: timelineCommunicationService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     //TESTING!!
 
   }
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
  
     Promise.resolve().then(() => this.cdref.detectChanges());
   }
 
 
-  ngOnChanges(changes: SimpleChanges) {
+  async ngOnChanges(changes: SimpleChanges) {
 
     for (let property in changes) {
       if(property == "selectStart")
@@ -53,7 +53,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @Input('selectStart') selectStart: Number = new Number();
   @Output() selectStartChange: EventEmitter<Number> = new EventEmitter<Number>();
 
-  selectStartChangeFun() {
+  async selectStartChangeFun() {
     this.selectStartChange.emit(this.selectStart.valueOf());
   }
 
@@ -61,7 +61,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @ViewChild("titleselectTitles") titleselectTitles!: ElementRef;
   @ViewChild("btnGetText") btnGetText!: ElementRef;
 
-  loadText() {
+  async loadText() {
     let titleAsText : String = this.titleselectTitles.nativeElement.value;
 
     this.newTextCommunicationService.getText(titleAsText).subscribe((res) => {
@@ -75,7 +75,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @Input('selectEnd') selectEnd: Number = new Number();
 
   @Output() selectEndChange: EventEmitter<Number> = new EventEmitter<Number>();
-  selectEndChangeFun() {
+  async selectEndChangeFun() {
     this.selectEndChange.emit(this.selectEnd.valueOf());
   }
 
@@ -84,7 +84,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @Input('selectedText') selectedText:String = new String();
   @Output() selectedTextChange: EventEmitter<String> = new EventEmitter<String>();
 
-  selectedTextChangeFun() {
+  async selectedTextChangeFun() {
     this.selectedTextChange.emit(this.selectedText.valueOf());
   }
 
@@ -93,7 +93,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @Input('commandTidslinjeWrapper') commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array<tidslinjeCommandWrapper>();
   @Output() commandTidslinjeWrapperChange: EventEmitter<Array<tidslinjeCommandWrapper>> = new EventEmitter<Array<tidslinjeCommandWrapper>>();
 
-  commandTidslinjeWrapperFun() {
+  async commandTidslinjeWrapperFun() {
     this.commandTidslinjeWrapperChange.emit(this.commandTidslinjeWrapper);
   }
 
@@ -102,7 +102,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @Input('tidslinjerList') tidslinjerList: Array<tidslinje> = new Array<tidslinje>();
   @Output() tidslinjerListChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
 
-  tidslinjerListChangeFun() {
+  async tidslinjerListChangeFun() {
     this.tidslinjerListChange.emit(this.tidslinjerList);
   }
 
@@ -110,7 +110,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @Input('titleList') titleList: Array<String> = new Array<String>();
   @Output() titleListChange: EventEmitter<Array<String>> = new EventEmitter<Array<String>>();
 
-  titleListChangeFun() {
+  async titleListChangeFun() {
     this.titleListChange.emit(this.titleList);
   }
 
@@ -118,7 +118,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @Input('currentTitle') currentTitle: title = new title();
   @Output() currentTitleChange: EventEmitter<title> = new EventEmitter<title>();
 
-  titleChangeFun() {
+  async titleChangeFun() {
     this.currentTitleChange.emit(this.currentTitle);
   }
 
@@ -127,7 +127,7 @@ export class titleSearchComponent implements OnChanges, OnInit {
   @Input('filteredtimelines') filteredtimelines: Observable<Array<tidslinje>> = new Observable<Array<tidslinje>>();
   @Output() filteredtimelinesChange: EventEmitter<Observable<Array<tidslinje>>> = new EventEmitter<Observable<Array<tidslinje>>>();
 
-  filteredTimelinesChangeFun() {
+  async filteredTimelinesChangeFun() {
     this.filteredtimelinesChange.emit(this.filteredtimelines);
   }
 }

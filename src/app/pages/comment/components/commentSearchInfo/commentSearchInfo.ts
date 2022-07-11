@@ -27,18 +27,18 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
     return index;
   };
 
-  countLikes(start: Number, end: Number, percent: Number) {
+  async countLikes(start: Number, end: Number, percent: Number) {
     let timeLinesFilteredTime = this.filterListByTime(start.valueOf(), end.valueOf(), percent.valueOf());
-  return timeLinesFilteredTime.reduce((nmbLikes, timeline) => {
+    return (await timeLinesFilteredTime).reduce((nmbLikes, timeline) => {
     if (timeline.like) return nmbLikes + 1;
     else return nmbLikes;
   }, 0.0)
   }
 
 
-  countDisLikes(start: Number, end: Number, percent: Number) {
+  async countDisLikes(start: Number, end: Number, percent: Number) {
     let timeLinesFilteredTime = this.filterListByTime(start.valueOf(), end.valueOf(), percent.valueOf());
-  return timeLinesFilteredTime.reduce((nmbDisLike, timeline) => {
+    return (await timeLinesFilteredTime).reduce((nmbDisLike, timeline) => {
     if (timeline.dislike) return nmbDisLike + 1;
     else return nmbDisLike;
   }, 0.0)
@@ -68,9 +68,9 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
       if (property == "commandTidslinjeWrapper") {
         console.log("change in command line");
         this.doChange();
-        this.filteredtimelines = of(this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf()));
-        this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
-        this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+        this.filteredtimelines = of(await this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf()));
+        this.likes = await this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+        this.dislikes = await  this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
 
         //Recalculate counting list
         this.countingList = of(await this.currentFenwick.getCountingList(0, this.currentTitle.text.length));
@@ -90,10 +90,8 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   likes = 0;
   dislikes = 0;
 
-  getSelectedArea() {
 
-  }
-  selectStartChangeFun() {
+  async  selectStartChangeFun() {
     this.selectStartChange.emit(this.selectStart);
   }
 
@@ -101,7 +99,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   @Input('selectEnd') selectEnd: Number = new Number();
 
   @Output() selectEndChange: EventEmitter<Number> = new EventEmitter<Number>();
-  selectEndChangeFun() {
+  async selectEndChangeFun() {
     this.selectEndChange.emit(this.selectEnd);
   }
 
@@ -110,7 +108,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   @Input('selectedText') selectedText: String = new String();
   @Output() selectedTextChange: EventEmitter<String> = new EventEmitter<String>();
 
-  selectedTextChangeFun() {
+  async selectedTextChangeFun() {
     this.selectedTextChange.emit(this.selectedText.valueOf());
   }
 
@@ -119,7 +117,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   @Input('commandTidslinjeWrapper') commandTidslinjeWrapper: Array<tidslinjeCommandWrapper> = new Array<tidslinjeCommandWrapper>();
   @Output() commandTidslinjeWrapperChange: EventEmitter<Array<tidslinjeCommandWrapper>> = new EventEmitter<Array<tidslinjeCommandWrapper>>();
 
-  commandTidslinjeWrapperFun() {
+  async commandTidslinjeWrapperFun() {
     this.commandTidslinjeWrapperChange.emit(this.commandTidslinjeWrapper);
   }
 
@@ -127,16 +125,16 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   @ViewChild("textToComment") textToComment!: ElementRef;
   @ViewChild("percent") percent!: ElementRef;
   
-  captureSelected() {
+  async captureSelected() {
     
     this.selectStart = this.textToComment.nativeElement.selectionStart;
     this.selectEnd = this.textToComment.nativeElement.selectionEnd;
     console.log("Following area is selected (start,end): (" + this.selectStart + "," + this.selectEnd + ")")
     console.log("Percent picked up is:" + this.percent.nativeElement.value)
 
-    this.filteredtimelines = of(this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf()));
-    this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
-    this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+    this.filteredtimelines = of(await this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf()));
+    this.likes = await this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+    this.dislikes = await this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
 
     //Send notification to parrent, such that one can broadcast this info to other childs
     this.selectStartChangeFun();
@@ -144,7 +142,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
     this.filteredTimelinesChangeFun();
   }
 
-  filterListByTime(start: number, end: number, percent: Number) {
+  async filterListByTime(start: number, end: number, percent: Number) {
     return this.tidslinjerList.filter((x) => {
 
       if (x.start && x.end)
@@ -155,7 +153,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
     
   }
 
-  doChange() {
+  async doChange() {
     this.commandTidslinjeWrapper.forEach((commandtidslinjen) => {
 
 
@@ -196,11 +194,11 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
 
 
   };
-  percentChange() {
+  async percentChange() {
     console.log("Percent changed to:" + this.percent.nativeElement.value)
-    this.filteredtimelines = of(this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value));
-    this.likes = this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
-    this.dislikes = this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+    this.filteredtimelines = of(await this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value));
+    this.likes = await this.countLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
+    this.dislikes = await this.countDisLikes(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value);
     this.filteredTimelinesChangeFun();
  
   }
@@ -209,7 +207,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   @Input('tidslinjerList') tidslinjerList: Array<tidslinje> = new Array<tidslinje>();
   @Output() tidslinjerListChange: EventEmitter<Array<tidslinje>> = new EventEmitter<Array<tidslinje>>();
 
-  tidslinjerListChangeFun() {
+  async tidslinjerListChangeFun() {
     this.tidslinjerListChange.emit(this.tidslinjerList);
   }
 
@@ -217,7 +215,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   @Input('titleList') titleList: Array<String> = new Array<String>();
   @Output() titleListChange: EventEmitter<Array<String>> = new EventEmitter<Array<String>>();
 
-  titleListChangeFun() {
+  async titleListChangeFun() {
     this.titleListChange.emit(this.titleList);
   }
   //Current title
@@ -227,7 +225,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   currentFenwick!: FenwFeatureTree;
   countingList!: Observable<number[]>
 
-  titleChangeFun() {
+  async titleChangeFun() {
 
     this.currentTitleChange.emit(this.currentTitle);
   }
@@ -236,7 +234,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
   @Input('filteredtimelines') filteredtimelines: Observable<Array<tidslinje>> = new Observable<Array<tidslinje>>();
   @Output() filteredtimelinesChange: EventEmitter<Observable<Array<tidslinje>>> = new EventEmitter<Observable<Array<tidslinje>>>();
 
-  filteredTimelinesChangeFun() {
+  async filteredTimelinesChangeFun() {
     this.filteredtimelinesChange.emit(this.filteredtimelines  );
   }
 }
