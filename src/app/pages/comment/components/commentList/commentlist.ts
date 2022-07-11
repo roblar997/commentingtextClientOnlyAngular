@@ -160,9 +160,9 @@ export class commentlistComponent implements OnChanges, OnInit {
       }
 
     })
-    this.tidslinjerListChangeFun();
 
-
+    if (commandTimelines != [])
+      this.tidslinjerListChangeFun();
 
   };
   
