@@ -48,24 +48,27 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
     for (let property in changes) {
       if (property == "selectedText")
         console.log("Child 2 detecting change. Value is now " + (changes[property].currentValue))
-      else if (property == "currentTitle") {
+     
+      else if (property == "tidslinjerList") {
+
         this.likes = 0
         this.dislikes = 0
         if (this.currentTitle != undefined && this.currentTitle.text != undefined) {
           this.currentFenwick = new FenwFeatureTree(this.currentTitle.text.length);
-          this.tidslinjerList.forEach((x) => {
-            if (x.start && x.end) {
-              this.currentFenwick.addTimeline(x.start.valueOf(), x.end.valueOf())
-            }
-          })
-
-          this.countingList = of(await this.currentFenwick.getCountingList(0, this.currentTitle.text.length));
-          console.log("Have following counting list: " + this.countingList);
         }
 
+        console.log("tidslinjer is now: " + JSON.stringify(this.tidslinjerList))
+        this.tidslinjerList.forEach((x) => {
+          if (x.start != undefined && x.end != undefined) {
+            this.currentFenwick.addTimeline(x.start.valueOf(), x.end.valueOf())
+          }
+        })
+
+        this.countingList = of(await this.currentFenwick.getCountingList(0, this.currentTitle.text.length));
+        console.log("Have following counting list: " + this.countingList);
       }
 
-      if (property == "commandTidslinjeWrapper") {
+      else if (property == "commandTidslinjeWrapper") {
         console.log("change in command line");
         this.doChange();
         this.filteredtimelines = of(await this.filterListByTime(this.selectStart.valueOf(), this.selectEnd.valueOf(), this.percent.nativeElement.value.valueOf()));

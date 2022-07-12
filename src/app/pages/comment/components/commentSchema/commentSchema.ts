@@ -15,7 +15,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
   ngOnInit(): void {
     //TESTING!!
     this.selectStartChangeFun()
-  }timestampChanged
+  }
 
 
   commentSchema: FormGroup;
