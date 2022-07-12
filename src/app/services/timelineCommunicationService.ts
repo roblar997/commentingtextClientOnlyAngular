@@ -31,8 +31,9 @@ export class timelineCommunicationService {
   }
 
   sendTimePLine(timeline: tidslinje): Observable<any> {
+
     const headers = { 'content-type': 'application/json; charset=utf-8' };
-    const data = JSON.stringify({ "remoteMethod": "addTimeLine", "timeline": tidslinje });
+    const data = JSON.stringify({ "remoteMethod": "addTimeLine", "timeline": timeline });
     return this.http.post(this.baseURL, data, { 'headers': headers });
     //return of("OK");
   }
@@ -46,7 +47,7 @@ export class timelineCommunicationService {
   }
   changePTimeLineById(id: Number, timelinen: tidslinje): Observable<any> {
     const headers = { 'content-type': 'application/json; charset=utf-8' };
-    const data = JSON.stringify({ "remoteMethod": "changeTimeline", "timeline": tidslinje, "id": id });
+    const data = JSON.stringify({ "remoteMethod": "changeTimeline", "timeline": timelinen, "id": id });
     return this.http.post(this.baseURL, data, { 'headers': headers });
    // return of("OK");
   }
