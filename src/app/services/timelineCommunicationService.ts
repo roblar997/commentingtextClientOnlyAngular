@@ -41,7 +41,8 @@ export class timelineCommunicationService {
     console.log("timestamp is still " + this.timestamp);
     let changeTime = new Date().valueOf();
     const headers = { 'content-type': 'application/json; charset=utf-8' };
-    const data = JSON.stringify({ "remoteMethod": "removeTimeline", "id": id, "timestampChanged": changeTime });
+    //Vanlige versjon har string som "id":"33", fremfor "id":333...endret derfor
+    const data = JSON.stringify({ "remoteMethod": "removeTimeline", "id": id.valueOf.toString(), "timestampChanged": changeTime });
     return this.http.post<String>(this.baseURL, data, { 'headers': headers });
    // return of("OK");
   }

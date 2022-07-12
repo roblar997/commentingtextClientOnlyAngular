@@ -51,7 +51,7 @@ export class commentSearchInfoComponent implements OnChanges, OnInit{
       else if (property == "currentTitle") {
         this.likes = 0
         this.dislikes = 0
-        if (this.currentTitle && this.currentTitle.text) {
+        if (this.currentTitle != undefined && this.currentTitle.text != undefined) {
           this.currentFenwick = new FenwFeatureTree(this.currentTitle.text.length);
           this.tidslinjerList.forEach((x) => {
             if (x.start && x.end) {
