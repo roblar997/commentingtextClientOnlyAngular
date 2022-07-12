@@ -37,12 +37,12 @@ export class timelineCommunicationService {
     return this.http.post(this.baseURL, data, { 'headers': headers });
     //return of("OK");
   }
-  removePTimeLineById(id: Number): Observable<any> {
+  removePTimeLineById(id: Number): Observable<String> {
     console.log("timestamp is still " + this.timestamp);
     let changeTime = new Date().valueOf();
     const headers = { 'content-type': 'application/json; charset=utf-8' };
     const data = JSON.stringify({ "remoteMethod": "removeTimeline", "id": id, "timestampChanged": changeTime });
-    return this.http.post(this.baseURL, data, { 'headers': headers });
+    return this.http.post<String>(this.baseURL, data, { 'headers': headers });
    // return of("OK");
   }
   changePTimeLineById(id: Number, timelinen: tidslinje): Observable<any> {
