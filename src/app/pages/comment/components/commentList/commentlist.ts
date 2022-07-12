@@ -1,4 +1,4 @@
-
+//
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TrackByFunction } from "@angular/core";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { tidslinje } from "../../../../models/tidslinje";
@@ -28,7 +28,8 @@ export class commentlistComponent implements OnChanges, OnInit {
     Promise.resolve().then(() => this.cdref.detectChanges());
   }
   async refresh() {
-    this.timelineCommunicationService.getPChanges(-1, "", undefined, undefined).subscribe((res2) => {
+
+    this.timelineCommunicationService.getPChanges(this.currentTitle.id).subscribe((res2) => {
       //this.doChange(res2);
       this.commandTidslinjeWrapper = res2;
       this.commandTidslinjeWrapperFun();
@@ -121,7 +122,7 @@ export class commentlistComponent implements OnChanges, OnInit {
 
     this.timelineCommunicationService.changePTimeLineById(id, tidslinjen2).subscribe((res) => {
       console.log("leaved change service")
-      this.timelineCommunicationService.getPChanges(tidslinjen2.texttocommentid,"CHANGE", undefined, tidslinjen2).subscribe((res2) => {
+      this.timelineCommunicationService.getPChanges(this.currentTitle.id).subscribe((res2) => {
         //this.doChange(res2);
         this.commandTidslinjeWrapper = res2;
         this.commandTidslinjeWrapperFun();
@@ -136,7 +137,7 @@ export class commentlistComponent implements OnChanges, OnInit {
   async removeById(id: Number) {
     this.timelineCommunicationService.removePTimeLineById(id).subscribe((res) => {
       console.log("leaved remove service")
-      this.timelineCommunicationService.getPChanges(id, "REMOVE", id.valueOf(), undefined).subscribe((res2) => {
+      this.timelineCommunicationService.getPChanges(this.currentTitle.id).subscribe((res2) => {
         this.commandTidslinjeWrapper = res2;
         this.commandTidslinjeWrapperFun();
         return;

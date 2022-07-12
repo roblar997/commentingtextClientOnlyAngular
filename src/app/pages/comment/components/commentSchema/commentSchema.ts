@@ -55,7 +55,7 @@ export class commentSchemaComponent implements OnChanges, OnInit {
       this.timelineCommunicationService.sendTimePLine(tidslinjen).subscribe((res) => {
         console.log("leaved add service")
         if (tidslinjen != undefined)
-             this.timelineCommunicationService.getPChanges(tidslinjen.texttocommentid, "ADD", undefined, tidslinjen).subscribe((res2) => {
+          this.timelineCommunicationService.getPChanges(this.currentTitle.id).subscribe((res2) => {
         this.commandTidslinjeWrapper = res2;
         this.commandTidslinjeWrapperFun();
         return;
